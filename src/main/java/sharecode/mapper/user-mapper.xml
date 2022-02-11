@@ -4,6 +4,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="shareCode">
 
-	
+	<insert id="signUpUser" parameterType="sharecode.vo.UserVO">
+		<selectKey keyProperty="USER_NO" resultType="int"
+			order="BEFORE">
+			SELECT USER_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO USERINFO
+		(USER_NO,USER_ID,USER_PW,USER_MAIL,USER_DATE)
+		VALUES(#{USER_NO},#{USER_ID},#{USER_PW},#{USER_MAIL},SYSDATE)
+	</insert>
+
 
 </mapper>
