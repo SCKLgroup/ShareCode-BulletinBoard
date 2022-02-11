@@ -26,7 +26,7 @@
 					<input type="text" name="USER_MAIL" id="USER_MAIL" placeholder="이메일 입력하세요">
 					<button type="submit">보내기</button>
 				</div>
- 
+
 				<div>
 					코드입력 :
 					<input type="text">
