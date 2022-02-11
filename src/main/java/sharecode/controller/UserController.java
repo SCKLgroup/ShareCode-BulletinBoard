@@ -13,10 +13,11 @@ public class UserController {
 	@Autowired
 	private UserDao dao;
 	
-	@RequestMapping(value = "/sharecode/signup.do")
+	@RequestMapping(value = "/shareCode/signup.do")
 	public String userSignUpAction(UserVO vo) {
+		System.out.println("컨트롤러 실행");
 		dao.signupUser(vo);
-		return "";
+		return "sharecode/signup_success";
 	}
 
 }
