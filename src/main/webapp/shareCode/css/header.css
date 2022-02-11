@@ -195,22 +195,8 @@ body {
 
 #my_modal .modal_close_btn {
 	position: absolute;
+	cursor: pointer;
 	top: 10px;
 	right: 10px;
 }
 
-/* LOGIN */
-.user_id_pass {
-	padding-bottom: 20px;
-	width: 100%;
-	border: 3px solid #6667AB;
-	border-right: none;
-	padding: 5px;
-	height: 20px;
-	border-radius: 5px 0 0 5px;
-	outline: none;
-}
-.login_font{
-	font-weight: bold;
-	color: #6667AB;
-}
