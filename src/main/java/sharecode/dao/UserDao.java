@@ -23,5 +23,6 @@ public class UserDao extends SqlSessionDaoSupport {
 	public void signupUser(UserVO vo) { //회원정보추가
 		System.out.println("dao실행");
 		this.getSqlSession().insert("signUpUser",vo);
+
 	}
 }
