@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<<<<<<< HEAD
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
@@ -51,6 +52,58 @@
 		$("button#join").click(function(){
 			$("form").submit();
 		});
+=======
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+</head>
+<body>
+
+	<div>
+		<div>
+			아이디 :
+			<input type="text">
+		</div>
+		<div>
+			비밀번호 :
+			<input type="text">
+		</div>
+
+		<div>
+			이메일 :
+			<input type="text">
+			<button type="submit">보내기</button>
+		</div>
+		<div>
+			코드입력 :
+			<input type="text">
+			<button type="submit">인증</button>
+		</div>
+
+
+	</div>
+	
+	<div>
+
+		<button type="submit">가입하기</button>
+
+	</div>
+
+
+
+
+
+
+
+</body>
+
+
+<!-- script -->
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+>>>>>>> branch 'master' of https://github.com/shareCodeProject/shareCode.git
 
 	});
 </script>
