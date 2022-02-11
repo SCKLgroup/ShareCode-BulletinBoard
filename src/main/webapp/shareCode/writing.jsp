@@ -47,6 +47,7 @@
 			<button class="write-btn" type="button" onclick="location.href='list.jsp'">확인</button>
 		</div>
 	</div>
+	
 </body>
 
 
