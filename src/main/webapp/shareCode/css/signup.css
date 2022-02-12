@@ -1,0 +1,29 @@
+/*main color: #6667AB; */
+.mail_check_input {
+	width: 50%;
+	height: 100%;
+	border:none;
+	font-size:28px;
+}
+
+.mail_check_button {
+	border: 1px solid black;
+	height: 30px;
+	width: 10%;
+}
+
+#mail_check_input_box_false {
+	background-color: #ebebe4;
+}
+
+#mail_check_input_box_true {
+	background-color: white;
+}
+
+.correct {
+	color: green;
+}
+
+.incorrect {
+	color: red;
+}
