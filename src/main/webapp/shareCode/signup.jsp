@@ -53,7 +53,7 @@
 
 </body>
 
-
+<!-- 컨트롤러 추가해야함 -->
 <!-- script -->
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
