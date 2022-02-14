@@ -34,7 +34,7 @@
 				<button type="submit" class="searchButton">
 					<i class="fa fa-search"></i>
 				</button>
-			</div>o
+			</div>
 		</div>
 
 		<ul class="menu">
