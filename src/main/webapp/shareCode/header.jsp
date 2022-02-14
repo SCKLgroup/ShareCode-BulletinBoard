@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="functions"
 	uri="http://java.sun.com/jsp/jstl/functions"%>
-	
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +12,7 @@
 
 
 <link rel="stylesheet" href="css/header.css" type="text/css">
+<link rel="stylesheet" href="css/login.css" type="text/css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.2.0/css/all.min.css"
 	integrity="sha512-6c4nX2tn5KbzeBJo9Ywpa0Gkt+mzCzJBrE1RB6fmpcsoN+b/w/euwIMuQKNyUoU/nToKN3a8SgNOtPrbW12fug=="
@@ -33,25 +34,20 @@
 				<button type="submit" class="searchButton">
 					<i class="fa fa-search"></i>
 				</button>
-			</div>
+			</div>o
 		</div>
 
 		<ul class="menu">
+
 			<li><a href="#work">SignUp</a></li>
-			<li><a href="#about" id="popup_open_btn">Login</a></li>
+			<li><a href="#about" id="popup_open_btn"  data-toggle="modal" data-target="#my_login_modal">Login</a></li>
 		</ul>
 	</header>
-	
-	<div id="my_modal">
-		<div>
-			<span class="login_font">ID<br>
-			<input  type="text" class="user_id_pass" placeholder="아이디를 입력해주세요"><br></span><br>
-			<span class="login_font">PASS</span><br>	
-			<input type="text" class="user_id_pass" placeholder="아이디를 입력해주세요">
-			<a class="modal_close_btn">ⅹ</a>
-		</div>
-	</div>
+
+
 
 	<script src="js/header.js"></script>
+	
+	<%@include file="login.jsp" %>
 </body>
 </html>
