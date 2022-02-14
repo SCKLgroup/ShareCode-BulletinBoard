@@ -1,5 +1,5 @@
 package sharecode.controller;
 
-public class test {
+public class PostController {
 
 }
