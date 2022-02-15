@@ -1,5 +1,8 @@
 package sharecode.service;
 
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +16,20 @@ public class PostServiceImpl implements PostService{
 	
 	@Override
 	public void postInsertAction(PostVO vo) {
-		// TODO Auto-generated method stub
 		dao.insertPost(vo);
+	}
+
+	@Override
+	public List<PostVO> postInfoSelect(int no) {
+		dao.updatePostHit(no);
+		return dao.selectPostInfo(no);
+	}
+
+	@Override
+	public void postInfoUpdate(int no) {
+		// TODO Auto-generated method stub
+		dao.updatePostInfo(no);
+		
 	}
 
 }

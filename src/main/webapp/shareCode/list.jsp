@@ -52,7 +52,7 @@
           </tbody>
       </table>
   </div>
-  <div class="btn-div"><button class="write-btn" type="button" onclick="location.href='writing.jsp'">글작성</button></div>
+  <div class="btn-div"><button class="write-btn" type="button" onclick="location.href='post-write.jsp'">글작성</button></div>
   
 <div class="container xlarge">
   <div class="pagination">

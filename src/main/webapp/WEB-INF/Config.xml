@@ -8,11 +8,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	
 	<mappers>
 		<mapper resource="sharecode/mapper/user-mapper.xml"/>
-<<<<<<< HEAD
 		<mapper resource="sharecode/mapper/post-mapper.xml"/>
-=======
 		<mapper resource="sharecode/mapper/login-mapper.xml"/>
->>>>>>> refs/heads/kangilwon
 	</mappers> 
 	
 	

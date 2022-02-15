@@ -16,13 +16,13 @@
 	<div class="main-content">
 		<div class="write-content">
 			<div class="write-title">
-				<h2>새 글 작성</h2>
+				<h2>글 수정</h2>
 			</div>
 			
-			<form method="post" action="post.do">
+			<form method="post" action="postModify.do">
 				<input hidden="hidden" />
 				<div class="form-row">
-					<span class="title">카테고리</span>
+					<span class="title writing">카테고리</span>
 					<select name="post_category" id="post_category">
 						<option value="Java">Java</option>
 						<option value="Python">Python</option>
@@ -32,12 +32,12 @@
 				</div>
 				
 				<div class="form-row">
-					<span class="title">제&emsp;&ensp;&nbsp;목</span> 
+					<span class="title writing">제&emsp;&ensp;&nbsp;목</span> 
 					<input type="text" placeholder="제목을 작성하세요" name="post_title" class="write"/>
 				</div>
 				
 				<div class="form-row">
-					<span class="title title-content">내&emsp;&ensp;&nbsp;용</span>
+					<span class="title writing title-content">내&emsp;&ensp;&nbsp;용</span>
 					<textarea placeholder="글을 작성하세요" name="content" class="write"></textarea>
 					<span style=display:none><textarea name="post_content"></textarea></span>
 				</div>
