@@ -12,6 +12,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(POST_NO, USER_NO, POST_TITLE, POST_CONTENT, POST_CATEGORY, POST_HIT, POST_DATE)
 		VALUES(#{post_no}, 1, #{post_title}, #{post_content}, #{post_category},0,SYSDATE)
 	</insert>
+	
+	<select id="selectLangCategory" parameterType="String" resultType="sharecode.vo.PostVO"> 
+		SELECT
+		POST_NO,USER_NO,POST_TITLE,POST_CONTENT,POST_CATEGORY,POST_HIT,POST_DATE
+		FROM POST
+		WHERE POST_CATEGORY= #{value}
+	</select>
 
  
 </mapper>

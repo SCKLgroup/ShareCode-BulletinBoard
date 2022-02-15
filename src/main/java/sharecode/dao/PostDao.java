@@ -1,5 +1,7 @@
 package sharecode.dao;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.inject.Inject;
 
@@ -19,8 +21,16 @@ public class PostDao extends SqlSessionDaoSupport {
 	protected void initDao(SqlSessionTemplate st) throws Exception {
 		this.setSqlSessionTemplate(st);
 	}
-	
+
 	public void insertPost(PostVO vo) {
-		this.getSqlSession().insert("insertPost",vo);
+		this.getSqlSession().insert("insertPost", vo);
+	}
+
+	public List<PostVO> selectPost(String category) {
+		return this.getSqlSession().selectList("selectLanguage", category);
+	}
+	
+	public List<PostVO> selectLangCategory(String category) { 
+		return this.getSqlSession().selectList("selectLangCategory",category);
 	}
 }
