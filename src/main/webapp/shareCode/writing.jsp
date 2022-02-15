@@ -19,8 +19,8 @@
 				<h2>새 글 작성</h2>
 			</div>
 			
-			<form method="post" action="post.do" onsubmit="return false;">
-			
+			<form method="post" action="post.do">
+				<input hidden="hidden" />
 				<div class="form-row">
 					<span class="title">카테고리</span>
 					<select name="post_category" id="post_category">
