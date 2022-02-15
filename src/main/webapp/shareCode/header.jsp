@@ -21,7 +21,6 @@
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-
 <body>
 	<header class="header">
 		<a href="" class="logo">ShareCode</a> <input class="menu-btn"
@@ -34,20 +33,31 @@
 				<button type="submit" class="searchButton">
 					<i class="fa fa-search"></i>
 				</button>
-			</div>o
+			</div>
 		</div>
 
-		<ul class="menu">
 
-			<li><a href="#work">SignUp</a></li>
-			<li><a href="#about" id="popup_open_btn"  data-toggle="modal" data-target="#my_login_modal">Login</a></li>
+		<ul class="menu">
+			<c:if test="${member == null}">
+				<li><a href="#work">SignUp</a></li>
+				<li><a href="#about" id="popup_open_btn">Login</a></li>
+			</c:if>
+			<c:if test="${member != null}">
+				<p>${member.USER_ID}님환영합니다.</p>
+				<button id="logoutBtn" type="button">logout</button>
+			</c:if>
+			<c:if test="${msg == false }">
+				<li><a href="#work">SignUp</a></li>
+				<li><a href="#about" id="popup_open_btn">Login</a></li>
+				<p style="color: red;">로그인 실패 ! 아이디와 비밀번호를 확인해 주세요</p>
+			</c:if>
 		</ul>
 	</header>
 
 
 
+
+	<%@include file="login.jsp"%>
 	<script src="js/header.js"></script>
-	
-	<%@include file="login.jsp" %>
 </body>
 </html>
