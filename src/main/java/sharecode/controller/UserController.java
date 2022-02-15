@@ -32,7 +32,7 @@ public class UserController {
 	}
 
 	/* 이메일 인증 */
-	@RequestMapping(value ="/shareCode/mailCheck.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/shareCode/mailCheck.do", method = RequestMethod.GET)
 	@ResponseBody
 	public String mailCheckGET(String email) throws Exception {
 
@@ -61,17 +61,27 @@ public class UserController {
 			helper.setSubject(title);
 			helper.setText(content, true);
 			mailSender.send(message);
-			
-			
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		String num = Integer.toString(checkNum);
-		
+
 		return num;
 
+	}
+
+	/* 아이디 중복 체크 */
+	@RequestMapping(value = "/shareCode/idCheck.do", method = RequestMethod.GET) // 아이디 중복체크
+	@ResponseBody
+	public String userIdCheckAction(String user_id) {
+		System.out.println("아이디체크 실행");
+		int dbid = dao.idCheck(user_id);
+		if (dbid != 0) {
+			return "1";
+		}
+		return "0";
 	}
 
 }

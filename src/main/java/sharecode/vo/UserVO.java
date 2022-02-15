@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class UserVO {
-	private int USER_NO;
-	private String USER_ID;
-	private String USER_PW;
-	private String USER_MAIL;
-	private String USER_DATE;
+	private int user_no;
+	private String user_id;
+	private String user_pw;
+	private String user_mail;
+	private String user_date;
 
 }

@@ -25,4 +25,8 @@ public class UserDao extends SqlSessionDaoSupport {
 		this.getSqlSession().insert("signUpUser",vo);
 
 	}
+	
+	public int idCheck(String id) { //아이디 중복 체크
+		return this.getSqlSession().selectOne("idCheck",id);
+	}
 }
