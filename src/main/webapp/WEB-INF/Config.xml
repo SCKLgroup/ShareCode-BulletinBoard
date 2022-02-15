@@ -10,6 +10,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="sharecode/mapper/user-mapper.xml"/>
 		<mapper resource="sharecode/mapper/post-mapper.xml"/>
 		<mapper resource="sharecode/mapper/login-mapper.xml"/>
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/heads/kangilwon
 	</mappers> 
 	
 	
