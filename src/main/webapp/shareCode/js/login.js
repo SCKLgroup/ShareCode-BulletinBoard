@@ -14,12 +14,13 @@ $(function() {
 			return;
 		}
 //		// 폼 내부의 데이터를 전송할 주소
-		console.log("aadsfasdfasdfasdf")
-//		 $("form").submit(); //제출
-		//		// 폼 내부의 데이터를 전송할 주소
+		
 		 var form = document.getElementById("homeForm");
 		 form.action= "login.do";
 		 form.submit(); //제출
-		 console.log("aadsfasdfasdfasdf")
 	});
+	$("#logoutBtn").on("click", function(){
+		location.href="logout.do";
+	});
+	
 });

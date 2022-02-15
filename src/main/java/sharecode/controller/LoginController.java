@@ -1,4 +1,4 @@
-package com.sckl.sharecode;
+package sharecode.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,29 +15,30 @@ import sharecode.vo.LoginVO;
 @Controller // 컨트롤러 빈으로 등록한다.
 public class LoginController {
 
-	@Autowired 
+	@Autowired
 	private LoginService loginService;
 
-
-	@RequestMapping(value="login.do", method = RequestMethod.POST)
+	@RequestMapping(value = "shareCode/login.do", method = RequestMethod.POST)
 	public String login(LoginVO vo, HttpServletRequest req, RedirectAttributes rttr) throws Exception {
-		System.out.println("안녕");
 		HttpSession session = req.getSession();
 		LoginVO login = loginService.login(vo);
-		
-		if(login == null) {
+
+		if (login == null) {
 			session.setAttribute("member", null);
-			rttr.addFlashAttribute("msg",false);
-		}else {
+			rttr.addFlashAttribute("msg", false);
+			System.out.println(login);
+			System.out.println(rttr);
+			return "/shareCode/list.jsp#about";
+		} else {
 			session.setAttribute("member", login);
+			return "/shareCode/list";
 		}
-		return "redirect:/";
 	}
 
-	@RequestMapping(value="logout.do", method = RequestMethod.GET)
+	@RequestMapping(value = "shareCode/logout.do", method = RequestMethod.GET)
 	public String logout(HttpSession session) throws Exception {
 		session.invalidate();
-		return "redirect:/";
+		return "/shareCode/list.jsp#about";
 
 	}
 
