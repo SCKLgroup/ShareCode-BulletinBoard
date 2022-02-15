@@ -14,7 +14,7 @@ public class LoginDAOImpl implements LoginDAO {
 	SqlSession sqlSession;
 	
 	@Override
-	public String loginCheck(LoginVO vo) {
-		return sqlSession.selectOne("login.login_check", vo);
+	public LoginVO login(LoginVO vo) throws Exception{
+		return sqlSession.selectOne("shareCode.login", vo);
 	}
 }

@@ -15,17 +15,9 @@ public class LoginServiceImpl implements LoginService {
 	LoginDAO loginDao;
 	
 	@Override
-	public String loginCheck(LoginVO vo, HttpSession session) {
-		String user_id = loginDao.loginCheck(vo);
-		if(user_id != null) {
-			session.setAttribute("user_id", vo.getUSER_ID());
-//			session.setAttribute("user_pw", vo.getUSER_PW());
-		}
-		return user_id;
+	public LoginVO login(LoginVO vo) throws Exception {
+		
+		return loginDao.login(vo);	
 	}
 	
-	@Override
-	public void logout(HttpSession session) {
-		session.invalidate(); // 세션 초기화
-	}
 }
