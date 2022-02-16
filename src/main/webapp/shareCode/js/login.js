@@ -18,7 +18,10 @@ $(function() {
 		 var form = document.getElementById("homeForm");
 		 form.action= "login.do";
 		 form.submit(); //제출
+		 
 	});
+	
+	// logout btn
 	$("#logoutBtn").on("click", function(){
 		location.href="logout.do";
 	});

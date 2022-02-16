@@ -70,4 +70,7 @@
 </div>
 
 </body>
+<script type="text/javascript">
+     console.log($('#loginUser').val());
+</script>
 </html>
