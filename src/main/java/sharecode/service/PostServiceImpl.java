@@ -25,6 +25,12 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
+	public void postDelete(int post_no) {
+		// TODO Auto-generated method stub
+		dao.deletePost(post_no);
+	}
+
+	@Override
 	public void postInfoUpdate(PostVO vo) {
 		// TODO Auto-generated method stub
 		dao.updatePostInfo(vo);

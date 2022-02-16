@@ -19,7 +19,7 @@
 				<h2>글 수정</h2>
 			</div>
 			
-			<form method="post" action="postModify.do?post_no=29">
+			<form method="post" action="postModify.do?post_no=${postInfo.post_no}">
 				<input hidden="hidden" value="1" name="user_no"/>
 				<div class="form-row">
 					<span class="title writing">카테고리</span>
@@ -33,18 +33,18 @@
 				
 				<div class="form-row">
 					<span class="title writing">제&emsp;&ensp;&nbsp;목</span> 
-					<input type="text" name="post_title" class="write" value="${postInfo.post_title}"/>
+					<input type="text" name="post_title" class="write" value="<c:out value="${postInfo.post_title}"></c:out>"/>
 				</div>
 				
 				<div class="form-row">
 					<span class="title writing title-content">내&emsp;&ensp;&nbsp;용</span>
-					<textarea name="content" class="write">${postInfo.post_content}</textarea>
+					<textarea name="content" class="write"><c:out value="${postInfo.post_content}"></c:out></textarea>
 					<span style=display:none><textarea name="post_content"></textarea></span>
 				</div>
 				
 			</form>
 
-			<button class="write-btn" type="button" onclick="location.href='postInfo.do?post_no=29'">취소</button>
+			<button class="write-btn" type="button" onclick="location.href='postInfo.do?post_no=${postInfo.post_no}'">취소</button>
 			<button class="write-btn" type="button" id="btn-submit">수정</button>
 		</div>
 	</div>
@@ -69,8 +69,10 @@
 
 		$("form").submit();
 	});
-
-
+	
+	$("#post_category").val("${postInfo.post_category}").prop("selected", true); 
+	
+	
 </script>
 </body>
 

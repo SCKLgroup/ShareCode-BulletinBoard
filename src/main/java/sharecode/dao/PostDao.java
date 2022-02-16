@@ -11,4 +11,5 @@ public interface PostDao {
 	public void updatePostHit(int post_no);
 	public void updatePostInfo(PostVO vo);
 	public List<PostVO> selectLangCategory(String category);
+	public void deletePost(int post_no);
 }

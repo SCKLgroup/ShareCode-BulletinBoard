@@ -11,4 +11,5 @@ public interface PostService {
 	public PostVO postInfoSelect(int post_no);
 	public void postInfoUpdate(PostVO vo);
 	public List<PostVO> listAction(String category);
+	public void postDelete(int post_no);
 }

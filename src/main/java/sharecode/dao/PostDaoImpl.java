@@ -39,6 +39,13 @@ public class PostDaoImpl implements PostDao {
 		sqlSession.update("updatePostInfo",vo);
 	}
 
+	@Override
+	public void deletePost(int post_no) {
+		sqlSession.delete("deletePost",post_no);
+		// TODO Auto-generated method stub
+		
+	}
+
 	public List<PostVO> selectPost(String category) {
 		return sqlSession.selectList("selectLanguage", category);
 	}

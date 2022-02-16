@@ -43,7 +43,7 @@
 
 				<c:forEach var="i" items="${selectLang}" varStatus="cnt">
 					<tbody>
-						<tr>
+						<tr  onClick="location.href='postInfo.do?post_no=${i.post_no}'">
 							<td><c:out value="${i.post_no}"></c:out></td>
 							<td><c:out value="${i.post_title }"></c:out></td>
 							<td><c:out value="${i.user_no }"></c:out></td>
