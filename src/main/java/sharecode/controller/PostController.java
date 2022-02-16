@@ -45,4 +45,14 @@ public class PostController {
 		
 		return "redirect:/shareCode/postInfo.do";
 	}
+	
+	@RequestMapping(value = "shareCode/list.do")
+	public String mainlistAction(Model model,String category) {
+
+		model.addAttribute("selectLang", postService.listAction("C++"));
+		System.out.println(model.addAttribute("selectLang", postService.listAction("Java")));
+		System.out.println("포스트컨트롤러의 메인리스트 실행");
+		
+		return "/shareCode/list";
+	}
 }
