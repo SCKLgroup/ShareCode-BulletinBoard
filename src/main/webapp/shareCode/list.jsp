@@ -19,7 +19,7 @@
 
 	<div class="inner_cont">
 		<div class="borad_list_tbl">
-			${selectLang}
+			<%-- ${selectLang} --%>
 			<table>
 				<caption>게시판 리스트</caption>
 				<colgroup>
