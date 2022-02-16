@@ -16,29 +16,29 @@
 	<div class="main-content">
 		<div class="write-content">
 			<div class="post-title">
-				<h2>질문있어요....ㅠ</h2>
+				<h2>${postInfo.post_title}</h2>
 			</div>
 			
 			
 			<div class="form-row">
 				<div class="section">
 					<span class="title post">카테고리</span> 
-					Python
+					${postInfo.post_category}
 				</div>
 				<div class="section">
 					<span class="title post">조회수</span>
-					10
+					${postInfo.post_hit}
 				</div>
 			</div>
 			
 			<div class="form-row">
 				<div class="section">
 					<span class="title post">작성자</span> 
-					abc123
+					${postInfo.user_id}
 				</div>
 				<div class="section">
 					<span class="title post">작성일</span>
-					2021.11.11
+					${postInfo.post_date}
 				</div>
 			</div>
 			
@@ -46,10 +46,18 @@
 		
 			
 			<div class="form-row post-content">
-				hello ~!
+				${postInfo.post_content}
 			</div>
 			
-	
+			<c:catch>
+				<c:choose>
+					<c:when test="${postInfo.user_no eq member}">
+						<button class="write-btn" type="button" onclick="location.href='postModifyInfo.do?post_no=29'">수정</button>
+						<button class="write-btn" type="button" onclick="location.href='postModifyInfo.do?post_no=29'">삭제</button>
+					</c:when>
+				</c:choose>
+			</c:catch>
+		
 		</div>
 	</div>
 

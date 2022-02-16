@@ -10,18 +10,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</selectKey>
 		INSERT INTO POST 
 		(POST_NO, USER_NO, POST_TITLE, POST_CONTENT, POST_CATEGORY, POST_HIT, POST_DATE)
-		VALUES(#{post_no}, 1, #{post_title}, #{post_content}, #{post_category},0,SYSDATE)
+		VALUES(#{post_no}, #{user_no}, #{post_title}, #{post_content}, #{post_category},0,SYSDATE)
 	</insert>
 	
 	<select id="selectPostInfo" parameterType="java.lang.Integer" resultType="sharecode.vo.PostVO">
 		SELECT POST_NO, P.USER_NO, USER_ID, POST_TITLE, POST_CONTENT, POST_CATEGORY, POST_HIT, POST_DATE
 		FROM POST P, USERINFO U
 		WHERE P.USER_NO=U.USER_NO
-		AND POST_NO=#{no}
+		AND POST_NO=#{post_no}
 	</select>
 	
 	<update id="updatePostHit" parameterType="java.lang.Integer">
-		UPDATE POST SET POST_HIT=POST+HIT+1
+		UPDATE POST SET POST_HIT=POST_HIT+1
 		WHERE POST_NO=#{post_no}
 	</update>
 	

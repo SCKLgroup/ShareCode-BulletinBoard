@@ -22,20 +22,20 @@ public class PostDaoImpl implements PostDao{
 	}
 
 	@Override
-	public List<PostVO> selectPostInfo(int no) {
+	public PostVO selectPostInfo(int post_no) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("selectPostInfo",no);
+		return sqlSession.selectOne("selectPostInfo",post_no);
 	}
 
 	@Override
-	public void updatePostHit(int no) {
-		sqlSession.update("updatePostHit",no);
+	public void updatePostHit(int post_no) {
+		sqlSession.update("updatePostHit",post_no);
 	}
 
 	@Override
-	public void updatePostInfo(int no) {
+	public void updatePostInfo(PostVO vo) {
 		// TODO Auto-generated method stub
-		sqlSession.update("updatePostInfo",no);
+		sqlSession.update("updatePostInfo",vo);
 	}
 	
 }
