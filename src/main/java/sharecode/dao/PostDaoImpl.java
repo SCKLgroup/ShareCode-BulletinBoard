@@ -1,5 +1,6 @@
 package sharecode.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -54,6 +55,14 @@ public class PostDaoImpl implements PostDao {
 		System.out.println("포스트다오임플리먼트에서 실행");
 		System.out.println(sqlSession.selectList("selectLangCategory", category));
 		return sqlSession.selectList("selectLangCategory", category);
+	}
+	
+	public List<PostVO> ajaxSelectCategory(HashMap<String, Object> jobs){
+		return sqlSession.selectList("ajaxselectLangCategory",jobs);
+	}
+	
+	public List<PostVO> ajaxallSelectCategory(HashMap<String, Object> jobs){
+		return sqlSession.selectList("ajaxallselectLangCategory",jobs);
 	}
 
 }
