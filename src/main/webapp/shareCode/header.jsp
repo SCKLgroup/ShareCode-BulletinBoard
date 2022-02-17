@@ -50,12 +50,13 @@
 			<div>
 				<ul class="menu">
 					<li><p>${member.USER_ID}님환영합니다.</p>
-						<button id="logoutBtn" type="button">logout</button></li>
+						<button id="logoutBtn" type="button">logout</button>
+					</li>
 				</ul>
 			</div>
 		</c:if>
-
-		<input type="hidden" value="${member.USER_ID}" id="loginUser">
+	
+			<input type="hidden" value="${member.USER_ID}" id="loginUser">
 	</header>
 
 

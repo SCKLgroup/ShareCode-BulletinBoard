@@ -23,7 +23,7 @@ $(function() {
 	
 	// logout btn
 	$("#logoutBtn").on("click", function(){
-		location.href="logout.do";
+		location.href = "logout.do";
 	});
 	
 });

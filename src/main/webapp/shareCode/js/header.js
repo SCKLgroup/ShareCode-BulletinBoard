@@ -61,6 +61,6 @@ document.getElementById('popup_open_btn').addEventListener('click', function() {
 	modal('my_modal');
 });
 
-if (document.getElementById("loginUser").value.length == 0) {
+if (window.location.pathname == '/web/shareCode/login.do') {
 	modal('my_modal');
 }

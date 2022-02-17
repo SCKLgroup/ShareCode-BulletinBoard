@@ -72,5 +72,6 @@
 </body>
 <script type="text/javascript">
      console.log($('#loginUser').val());
+     console.log(window.location.pathname);
 </script>
 </html>
