@@ -26,8 +26,6 @@ public class LoginController {
 		if (login == null) {
 			session.setAttribute("member", null);
 			rttr.addFlashAttribute("msg", false);
-			System.out.println(login);
-			System.out.println(rttr);
 			return "/shareCode/list.jsp#about";
 		} else {
 			session.setAttribute("member", login);

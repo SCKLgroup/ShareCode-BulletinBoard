@@ -1,6 +1,7 @@
 /**
  * 
  */
+
 function modal(id) {
 	var zIndex = 9999;
 	var modal = document.getElementById(id);
@@ -23,8 +24,10 @@ function modal(id) {
 	// 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
 	modal.querySelector('.modal_close_btn').addEventListener('click',
 			function() {
+
 				bg.remove();
 				modal.style.display = 'none';
+
 			});
 
 	modal
@@ -54,5 +57,10 @@ Element.prototype.setStyle = function(styles) {
 
 document.getElementById('popup_open_btn').addEventListener('click', function() {
 	// 모달창 띄우기
+
 	modal('my_modal');
 });
+
+if (window.location.pathname == '/web/shareCode/login.do') {
+	modal('my_modal');
+}
