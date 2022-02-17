@@ -37,23 +37,26 @@
 		</div>
 
 
-		<ul class="menu">
-			<c:if test="${member == null}">
-				<li><a href="#work">SignUp</a></li>
-			</c:if>
-			<c:if test="${member == null}">
-				<li><a href="#about" id="popup_open_btn">Login</a></li>
-			</c:if>
-			<c:if test="${msg == false }">
-				<p style="color: red;">로그인 실패 ! 아이디와 비밀번호를 확인해 주세요</p>
-			</c:if>
-			<c:if test="${member != null}">
-				<p>${member.USER_ID}님환영합니다.</p>
-			</c:if>
-			<c:if test="${member != null}">
-				<button id="logoutBtn" type="button">logout</button>
-			</c:if>			
-		</ul>
+		<c:if test="${member == null}">
+			<div>
+				<ul class="menu">
+					<li><a href="#work">SignUp</a></li>
+					<li><a href="#about" id="popup_open_btn">Login</a></li>
+				</ul>
+			</div>
+		</c:if>
+
+		<c:if test="${member != null}">
+			<div>
+				<ul class="menu">
+					<li><p>${member.USER_ID}님환영합니다.</p>
+						<button id="logoutBtn" type="button">logout</button>
+					</li>
+				</ul>
+			</div>
+		</c:if>
+	
+			<input type="hidden" value="${member.USER_ID}" id="loginUser">
 	</header>
 
 
