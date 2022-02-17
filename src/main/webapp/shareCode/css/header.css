@@ -200,3 +200,24 @@ body {
 	right: 10px;
 }
 
+.login_menu {
+	text-align: right;
+	padding-right: 1.5%;
+}
+
+.helle_user {
+	font-family: Helvetica, sans-serif;
+    font-weight: bold;
+	color: #6667ab;
+}
+
+#logoutBtn{
+	background-color: #6667AB;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 0.2rem;
+    border: 0;
+    padding: 1%;
+    margin-left: 2%;
+	cursor: pointer;
+}

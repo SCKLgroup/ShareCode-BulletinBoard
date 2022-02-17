@@ -23,9 +23,11 @@
 </head>
 <body>
 	<header class="header">
+
 		<a href="/web/shareCode/list.jsp" class="logo">ShareCode</a> <input class="menu-btn"
 			type="checkbox" id="menu-btn" /> <label class="menu-icon"
 			for="menu-btn"><span class="navicon"></span></label>
+
 
 		<div class="wrap">
 			<div class="search">
@@ -47,16 +49,15 @@
 		</c:if>
 
 		<c:if test="${member != null}">
-			<div>
-				<ul class="menu">
-					<li><p>${member.USER_ID}님환영합니다.</p>
-						<button id="logoutBtn" type="button">logout</button>
-					</li>
-				</ul>
+			<div class="login_menu">
+				<p class="helle_user">[ ${member.USER_ID} ] 님 환영합니다 :)
+					<button id="logoutBtn" type="button">logout</button>
+				</p>
+
 			</div>
 		</c:if>
-	
-			<input type="hidden" value="${member.USER_ID}" id="loginUser">
+
+		<input type="hidden" value="${member.USER_ID}" id="loginUser">
 	</header>
 
 

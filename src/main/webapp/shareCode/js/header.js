@@ -63,4 +63,5 @@ document.getElementById('popup_open_btn').addEventListener('click', function() {
 
 if (window.location.pathname == '/web/shareCode/login.do') {
 	modal('my_modal');
+	alert("아이디 또는 비밀번호가 일치하지 않습니다.")
 }
