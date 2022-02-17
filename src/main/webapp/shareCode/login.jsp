@@ -24,23 +24,22 @@
 				<h1 class="login_title">LOGIN</h1>
 				<a class="modal_close_btn">ⅹ</a>
 				<form name="homeForm" method="post" id="homeForm">
-					<c:if test="${member == null}">
-						<span class="login_font">ID <input type="text"
-							name="USER_ID" id="USER_ID" class="user_id_pass"
-							placeholder="아이디를 입력해주세요"> <br>
-						</span>
-						<br>
-						<span class="login_font">PASS</span>
-						<input type="password" class="user_id_pass" name="USER_PW"
-							id="USER_PW" placeholder="비밀번호를 입력해주세요">
-						<button type="button" class="login_btn" id="btnLogin">login</button>
+					<c:if test="${member == null &&kakaoid == null}">
+						<div>
+							<span class="login_font">ID <input type="text"
+								name="USER_ID" id="USER_ID" class="user_id_pass"
+								placeholder="아이디를 입력해주세요"> <br>
+							</span> <br> <span class="login_font">PASS</span> <input
+								type="password" class="user_id_pass" name="USER_PW" id="USER_PW"
+								placeholder="비밀번호를 입력해주세요">
+							<button type="button" class="login_btn" id="btnLogin">login</button>
+							<a
+								href="https://kauth.kakao.com/oauth/authorize?
+								client_id=2790956db8b98f04db2d8d8df073fa48&
+								redirect_uri=http://localhost:8080/web/shareCode/home.do&
+								response_type=code">로그인</a>
+						</div>
 					</c:if>
-					<c:if test="${msg == false }">
-						<p style="color: red;">로그인 실패 : 아이디와 비밀번호를 확인해주세요.</p>
-					
-					</c:if>
-					
-
 				</form>
 			</div>
 
