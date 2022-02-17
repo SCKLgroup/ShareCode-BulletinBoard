@@ -71,9 +71,26 @@
 <div class="main-reply">
 	<div class="panel">
 	  <div class="panel-body">
-	    <textarea class="form-control" rows="2" placeholder="댓글을 작성하세요"></textarea>
+	  	<c:choose>
+			<c:when test="${member.user_no eq null}">
+				<textarea class="form-control" name="com_content" id="replyArea" rows="2" placeholder="로그인이 필요합니다" disabled></textarea>
+			</c:when>
+			<c:otherwise>
+				<form action="#" id="commentsForm" name="commentsForm" method="post">
+					<input type="hidden" name="post_no" value="${postInfo.post_no}">
+					<input type="hidden" name="user_no" value="${member.user_no}">
+					<input type="hidden" name="com_pnum" value="0">
+					<input type="hidden" name="com_step" value="0">
+					<input type="hidden" name="com_lev" value="0">
+					<input type="hidden" name="com_ref" value="0">
+					<input type="hidden" name="com_reply" value="0">
+					<input type="hidden" name="com_job" value="0">
+				    <textarea class="form-control" name="com_content" id="replyArea" rows="2" placeholder="댓글을 작성하세요"></textarea>
+	      			<button class="write-btn reply-btn" id="commentbtn" type="submit">등록</button>
+				</form>
+			</c:otherwise>
+		</c:choose>
 	    <div class="mar-top">
-	      <button class="write-btn reply-btn" type="submit">등록</button>
 	    </div>
 	  </div>
 	</div>
@@ -91,9 +108,12 @@
 	        <div class="pad-ver">
 	          <a class="btn btn-sm" href="#">답글</a>
 	        </div>
-	        
 	        <hr>
-	        <div>
+	        
+	        <div>여기 !</div>
+	        
+	        <div id="replyShow"></div> 
+	   <!-- 
 	          <div class="media-block">
 	            <a class="media-left" href="#"><img class="img-circle img-sm" alt="Profile Picture" src="https://bootdey.com/img/Content/avatar/avatar2.png"></a>
 	            <div class="media-body">
@@ -107,19 +127,57 @@
 	          	  </div>
 	            </div>
 	          </div>
-	          <hr>
+	          <hr> -->
 	        </div>
 	      </div>
 	    </div>
 	  </div>
 	</div>
-</div>
 
 
 <script type="text/javascript">
+	commentsAjax('/web/commentsList.do',{"post_no":${postInfo.post_no}},'json');
+	
+	function commentsAjax(url,data,dataType){
+		 $.ajax({
+	          url:url,
+	          type:'POST',
+	          data:data,
+	          dataType:dataType,              
+	          success:function(v){
+	        	 commentsListfunc(v);
+	          },
+	          error:function(e){
+	             alert('error'+e);
+	          }
+	       });   
+	}
+	
+   function commentsListfunc(v){
+	      var temp="";
+	       $.each(v.commentsList,function(index,dom){
+	    		temp+="<div class=\"media-block\">";
+	    		temp+="<a class=\"media-left\" href=\"#\"><img class=\"img-circle img-sm\" alt=\"Profile Picture\" src=\"https://bootdey.com/img/Content/avatar/avatar2.png\"></a>";
+	    		temp+="<div class=\"media-body\">";
+	    		temp+="<div class=\"mar-btm\">";
+	    		temp+="<a href=\"#\" class=\"btn-link text-semibold media-heading box-inline\">"+dom.user_id+"</a>";
+	   			temp+="<p class=\"text-muted text-sm\">"+dom.com_date+"</p>";
+	   			temp+="</div>";
+  				temp+="<p>"+dom.com_content+"</p>";
+    			temp+="<div class=\"pad-ver\">";
+	    		temp+="<a class=\"btn btn-sm\" href=\"#\">답글</a>";
+	    		temp+="</div></div></div><hr>";
+	       });
+	       $("div#replyShow").html(temp);
+	       $("textarea#replyArea").val('');
+	   }
+	
 	$(function(){
-		
+ 		$("button#commentbtn").click(function(){
+ 			commentsAjax('${pageContext.request.contextPath}/comments.do',$("form#commentsForm").serialize(),'json');
+ 	    }); 
 	});
+	
 </script>
 </body>
 </html>
