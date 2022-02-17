@@ -35,6 +35,11 @@
 							id="USER_PW" placeholder="비밀번호를 입력해주세요">
 						<button type="button" class="login_btn" id="btnLogin">login</button>
 					</c:if>
+					<c:if test="${msg == false }">
+						<p style="color: red;">로그인 실패 : 아이디와 비밀번호를 확인해주세요.</p>
+					
+					</c:if>
+					
 
 				</form>
 			</div>

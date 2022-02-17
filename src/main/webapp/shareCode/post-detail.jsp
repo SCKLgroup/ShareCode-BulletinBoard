@@ -16,7 +16,7 @@
 	<div class="main-content">
 		<div class="write-content">
 			<div class="post-title">
-				<h2>${postInfo.post_title}</h2>
+				<h2><c:out value="${postInfo.post_title}"></c:out></h2>
 			</div>
 			
 			
@@ -34,7 +34,7 @@
 			<div class="form-row">
 				<div class="section">
 					<span class="title post">작성자</span> 
-					${postInfo.user_id}
+					<c:out value="${postInfo.user_id}"></c:out>
 				</div>
 				<div class="section">
 					<span class="title post">작성일</span>
@@ -46,14 +46,15 @@
 		
 			
 			<div class="form-row post-content">
-				${postInfo.post_content}
+				<c:out value="${postInfo.post_content}"></c:out>
 			</div>
+			
+						<button class="write-btn" type="button" onclick="location.href='postModifyInfo.do?post_no=${postInfo.post_no}'">수정</button>
+						<button class="write-btn" type="button" onclick="location.href='postDelete.do?post_no=${postInfo.post_no}'">삭제</button>
 			
 			<c:catch>
 				<c:choose>
-					<c:when test="${postInfo.user_no eq member}">
-						<button class="write-btn" type="button" onclick="location.href='postModifyInfo.do?post_no=29'">수정</button>
-						<button class="write-btn" type="button" onclick="location.href='postModifyInfo.do?post_no=29'">삭제</button>
+					<c:when test="${postInfo.user_no eq member.user_no}">
 					</c:when>
 				</c:choose>
 			</c:catch>

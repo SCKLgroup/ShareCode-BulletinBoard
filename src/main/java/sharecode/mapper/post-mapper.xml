@@ -36,6 +36,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM POST
 		WHERE POST_CATEGORY= #{value}
 	</select>
-
+	
+	<delete id="deletePost" parameterType="java.lang.Integer">
+		DELETE FROM POST
+		WHERE
+		POST_NO=#{post_no}
+	</delete>
  
 </mapper>

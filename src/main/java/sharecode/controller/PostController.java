@@ -38,6 +38,13 @@ public class PostController {
 		return "/shareCode/post-modify";
 	}
 	
+	@RequestMapping(value = "shareCode/postDelete.do")
+	public String postDelete(int post_no) {
+		postService.postDelete(post_no);
+	
+		return "redirect:/shareCode/list.do";
+	}
+	
 	@RequestMapping(value = "shareCode/postModify.do")
 	public String postInfoUpdate(PostVO vo,RedirectAttributes redirect) {
 		postService.postInfoUpdate(vo);

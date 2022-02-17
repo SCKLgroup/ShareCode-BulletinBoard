@@ -15,4 +15,5 @@ public class PostVO {
 	private String post_category;
 	private int post_hit;
 	private String post_date;
+	private String user_id;
 }

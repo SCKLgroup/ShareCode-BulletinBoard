@@ -9,36 +9,39 @@
 <link rel="stylesheet" href="css/list.css" type="text/css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
+	ajaxData('/web/shareCode/list.do', {
+		"job" : "default"
+	}, 'json'); //전체리스트 출력
 
-	ajaxData('/web/shareCode/list.do', {"job":"default"},'json'); //전체리스트 출력
-	
-	function selectAjax(){
-		ajaxData('/web/shareCode/list.do', {"job":$(".languageSelect option:selected").val()},'json');
+	function selectAjax() {
+		ajaxData('/web/shareCode/list.do', {
+			"job" : $(".languageSelect option:selected").val()
+		}, 'json');
 	}
-	
-	function ajaxData(url,data,dataType){
+
+	function ajaxData(url, data, dataType) {
 		$.ajax({
-			url:url,
-			data:data,
-			dataType:dataType,
-			success:function(v){
+			url : url,
+			data : data,
+			dataType : dataType,
+			success : function(v) {
 				list(v);
 				console.log(v);
 			},
-			error:function(e){
-				alert('에이젝스에서 에러뜬다'+e);
+			error : function(e) {
+				alert('에이젝스에서 에러뜬다' + e);
 			}
-			
+
 		});
 	}
-	
-	function list(v){
-		var temp="";
-		$.each(v.lang,function(index,dom){
-			temp+=""
+
+	function list(v) {
+		var temp = "";
+		$.each(v.lang, function(index, dom) {
+			temp += ""
 		});
 	}
-	
+
 	$(function() {
 
 	});
@@ -72,8 +75,11 @@
 				</thead>
 
 				<c:forEach var="i" items="${selectLang}" varStatus="cnt">
+
+
 					<%-- <tbody>
-						<tr>
+						<tr onClick="location.href='postInfo.do?post_no=${i.post_no}'">
+
 							<td><c:out value="${i.post_no}"></c:out></td>
 							<td><c:out value="${i.post_title }"></c:out></td>
 							<td><c:out value="${i.user_no }"></c:out></td>
@@ -82,9 +88,9 @@
 						</tr>
 					</tbody> --%>
 				</c:forEach>
-				
+
 				<tbody id="tblist">
-				
+
 				</tbody>
 			</table>
 		</div>
