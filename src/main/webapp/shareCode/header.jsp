@@ -51,7 +51,7 @@
 		<c:if test="${member != null}">
 			<div class="login_menu">
 				<p class="helle_user">
-					[ ${member.USER_ID} ] 님 환영합니다 :)
+					[ ${member.user_id} ] 님 환영합니다 :)
 					<button id="logoutBtn" type="button">logout</button>
 				</p>
 
@@ -70,7 +70,7 @@
 			</div>
 		</c:if>
 
-		<input type="hidden" value="${member.USER_ID}" id="loginUser">
+		<input type="hidden" value="${member.user_id}" id="loginUser">
 	</header>
 
 

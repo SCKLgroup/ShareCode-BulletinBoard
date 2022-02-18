@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="login" resultType="sharecode.vo.LoginVO">
 		SELECT USER_NO,USER_ID, USER_PW
 		FROM USERINFO
-		WHERE USER_ID = #{USER_ID}
-		AND USER_PW = #{USER_PW}
+		WHERE USER_ID = #{user_id}
+		AND USER_PW = #{user_pw}
 	</select>
 </mapper>

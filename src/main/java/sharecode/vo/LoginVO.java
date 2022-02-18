@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 
 public class LoginVO {
 	private int user_no;
-	private String USER_ID;
-	private String USER_PW;
-	private String USER_MAIL;
-	private String USER_DATE;
+	private String user_id;
+	private String user_pw;
+	private String user_mail;
+	private String user_date;
 }
