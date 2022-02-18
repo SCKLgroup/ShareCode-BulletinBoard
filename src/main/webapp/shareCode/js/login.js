@@ -21,6 +21,12 @@ $(function() {
 		 
 	});
 	
+//	function enterkey() {
+//		if (window.event.keyCode == 13) {
+//	    	// 엔터키가 눌렸을 때
+//	    }
+//	}
+	
 	// logout btn
 	$("#logoutBtn").on("click", function(){
 		location.href = "logout.do";

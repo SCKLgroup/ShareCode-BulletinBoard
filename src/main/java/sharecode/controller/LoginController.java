@@ -22,22 +22,26 @@ public class LoginController {
 	public String login(LoginVO vo, HttpServletRequest req, RedirectAttributes rttr) throws Exception {
 		HttpSession session = req.getSession();
 		LoginVO login = loginService.login(vo);
-
+		System.out.println(login);
 		if (login == null) {
 			session.setAttribute("member", null);
 			rttr.addFlashAttribute("msg", false);
-			return "/shareCode/list.jsp#about";
+			return "shareCode/list";
 		} else {
 			session.setAttribute("member", login);
-			return "/shareCode/list";
+			session.setMaxInactiveInterval(30*60);
+//			return "redirect:post.do";
+			return "shareCode/list";
 		}
 	}
 
 	@RequestMapping(value = "shareCode/logout.do", method = RequestMethod.GET)
-	public String logout(HttpSession session) throws Exception {
-		session.invalidate();
-		return "/shareCode/list.jsp#about";
-
+	public String logout(HttpServletRequest req) throws Exception {
+		req.getSession().invalidate();
+		req.getSession(true);
+		
+//		return "redirect:post.do";
+		return "shareCode/list";
 	}
 
 }
