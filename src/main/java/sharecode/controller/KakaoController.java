@@ -24,6 +24,7 @@ public class KakaoController {
         HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_Token);
         HttpSession kakao = req.getSession();
         kakao.setAttribute("kakaoid", userInfo.get("nickname"));
+        kakao.setMaxInactiveInterval(30*60);
         System.out.println("###access_Token#### : " + access_Token);
         System.out.println("###userInfo#### : " + userInfo.get("email"));
         System.out.println("###nickname#### : " + userInfo.get("nickname"));
