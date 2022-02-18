@@ -79,11 +79,6 @@
 				<form action="#" id="commentsForm" name="commentsForm" method="post">
 					<input type="hidden" name="post_no" value="${postInfo.post_no}">
 					<input type="hidden" name="user_no" value="${member.user_no}">
-					<input type="hidden" name="com_pnum" value="0">
-					<input type="hidden" name="com_step" value="0">
-					<input type="hidden" name="com_lev" value="0">
-					<input type="hidden" name="com_ref" value="0">
-					<input type="hidden" name="com_reply" value="0">
 					<input type="hidden" name="com_job" value="0">
 				    <textarea class="form-control" name="com_content" id="replyArea" rows="2" placeholder="댓글을 작성하세요"></textarea>
 	      			<button class="write-btn reply-btn" id="commentbtn" type="submit">등록</button>

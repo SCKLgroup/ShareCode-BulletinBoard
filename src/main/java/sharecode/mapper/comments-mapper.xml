@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="comments">
 	
 	<select id="selectCommentsList" parameterType="java.lang.Integer" resultType="sharecode.vo.CommentsVO">
-		SELECT COM_NO, POST_NO, C.USER_NO, USER_ID, COM_CONTENT, COM_PNUM, COM_STEP, COM_LEV, COM_REF, COM_REPLY, COM_JOB, COM_DATE
+		SELECT COM_NO, POST_NO, C.USER_NO, USER_ID, COM_CONTENT, COM_PNUM, COM_JOB, COM_DATE
 		FROM COMMENTS C, USERINFO U
 		WHERE C.USER_NO = U.USER_NO
 		AND POST_NO=#{post_no}
@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			SELECT COMMENTS_SEQ.NEXTVAL FROM DUAL
 		</selectKey>
 		INSERT INTO COMMENTS
-		values(#{com_no},#{post_no},#{user_no},#{com_content},#{com_pnum},#{com_step},#{com_lev},#{com_ref},#{com_reply},#{com_job},SYSDATE)
+		values(#{com_no},#{post_no},#{user_no},#{com_content},#{com_no},#{com_job},SYSDATE)
 	</insert>
 	
 </mapper>
