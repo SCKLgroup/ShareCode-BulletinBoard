@@ -44,20 +44,14 @@ body{
     padding: 25px 20px;
 }
 
-
-.media-block .media-left {
-    display: block;
-    float: left
-}
-
-.media-block .media-right {
-    float: right
-}
-
-.media-block .media-body {
+.media-body {
     display: block;
     overflow: hidden;
-    width: auto
+    width: auto;
+    margin: 20px;
+}
+.reply-block{
+	margin-left: 80px;
 }
 
 .middle .media-left,
@@ -91,15 +85,9 @@ body{
 }
 .text-sm {
     font-size: 0.9em;
-}
-.text-5x, .text-4x, .text-5x, .text-2x, .text-lg, .text-sm, .text-xs {
-    line-height: 1.25;
+    margin-top:5px;
 }
 
-
-.btn-sm, .btn-group-sm>.btn, .btn-icon.btn-sm {
-    padding: 5px 10px !important;
-}
 
 .mar-top {
     margin-top: 15px;

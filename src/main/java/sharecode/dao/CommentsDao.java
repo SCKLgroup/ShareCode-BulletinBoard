@@ -7,4 +7,5 @@ import sharecode.vo.CommentsVO;
 public interface CommentsDao {
 	public List<CommentsVO> selectCommentsList(int post_no);
 	public void insertCommentsInfo(CommentsVO vo);
+	public int getComSequence();
 }

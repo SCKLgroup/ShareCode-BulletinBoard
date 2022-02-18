@@ -20,7 +20,7 @@
 			</div>
 			
 			<form method="post" action="post.do">
-				<input hidden="hidden" value="${member}" name="user_no"/>
+				<input hidden="hidden" value="${member.user_no}" name="user_no"/>
 				<div class="form-row">
 					<span class="title writing">카테고리</span>
 					<select name="post_category" id="post_category">

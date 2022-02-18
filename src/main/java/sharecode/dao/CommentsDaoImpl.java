@@ -28,4 +28,10 @@ public class CommentsDaoImpl implements CommentsDao{
 		
 	}
 
+	@Override
+	public int getComSequence() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("getComSequence");
+	}
+
 }

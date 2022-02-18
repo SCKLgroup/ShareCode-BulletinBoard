@@ -55,12 +55,11 @@
 				<c:out value="${postInfo.post_content}"></c:out>
 			</div>
 			
-						<button class="write-btn" type="button" onclick="location.href='postModifyInfo.do?post_no=${postInfo.post_no}'">수정</button>
-						<button class="write-btn" type="button" onclick="location.href='postDelete.do?post_no=${postInfo.post_no}'">삭제</button>
-			
 			<c:catch>
 				<c:choose>
 					<c:when test="${postInfo.user_no eq member.user_no}">
+						<button class="write-btn" type="button" onclick="location.href='postModifyInfo.do?post_no=${postInfo.post_no}'">수정</button>
+						<button class="write-btn" type="button" onclick="location.href='postDelete.do?post_no=${postInfo.post_no}'">삭제</button>
 					</c:when>
 				</c:choose>
 			</c:catch>
@@ -85,49 +84,15 @@
 				</form>
 			</c:otherwise>
 		</c:choose>
-	    <div class="mar-top">
-	    </div>
 	  </div>
 	</div>
 
 	<div class="panel">
-	    <div class="panel-body">
-	    <div class="media-block">
-	      <a class="media-left" href="#"><img class="img-circle img-sm" alt="Profile Picture" src="https://bootdey.com/img/Content/avatar/avatar1.png"></a>
-	      <div class="media-body">
-	        <div class="mar-btm">
-	          <a href="#" class="btn-link text-semibold media-heading box-inline">작성자</a>
-	          <p class="text-muted text-sm">2022.02.02</p>
-	        </div>
-	        <p>댓글 작성 내용 </p>
-	        <div class="pad-ver">
-	          <a class="btn btn-sm" href="#">답글</a>
-	        </div>
-	        <hr>
-	        
-	        <div>여기 !</div>
-	        
+	    <div>
 	        <div id="replyShow"></div> 
-	   <!-- 
-	          <div class="media-block">
-	            <a class="media-left" href="#"><img class="img-circle img-sm" alt="Profile Picture" src="https://bootdey.com/img/Content/avatar/avatar2.png"></a>
-	            <div class="media-body">
-	              <div class="mar-btm">
-	                <a href="#" class="btn-link text-semibold media-heading box-inline">답글작성자</a>
-					  <p class="text-muted text-sm">2022.02.02</p>
-				  </div>
-				  <p>댓글 작성 내용 </p>
-				  <div class="pad-ver">
-				 	 <a class="btn btn-sm" href="#">답글</a>
-	          	  </div>
-	            </div>
-	          </div>
-	          <hr> -->
-	        </div>
-	      </div>
-	    </div>
-	  </div>
-	</div>
+        </div>
+      </div>
+    </div>
 
 
 <script type="text/javascript">
@@ -151,17 +116,19 @@
    function commentsListfunc(v){
 	      var temp="";
 	       $.each(v.commentsList,function(index,dom){
-	    		temp+="<div class=\"media-block\">";
-	    		temp+="<a class=\"media-left\" href=\"#\"><img class=\"img-circle img-sm\" alt=\"Profile Picture\" src=\"https://bootdey.com/img/Content/avatar/avatar2.png\"></a>";
-	    		temp+="<div class=\"media-body\">";
+	    		if (dom.com_job==0){
+	    			temp+="<div class=\"media-body\">";
+	    		}else{
+	    			temp+="<div class=\"media-body reply-block\">";
+	    		}
 	    		temp+="<div class=\"mar-btm\">";
 	    		temp+="<a href=\"#\" class=\"btn-link text-semibold media-heading box-inline\">"+dom.user_id+"</a>";
-	   			temp+="<p class=\"text-muted text-sm\">"+dom.com_date+"</p>";
+	   			temp+="<div class=\"text-muted text-sm\">"+dom.com_date+"</div>";
 	   			temp+="</div>";
   				temp+="<p>"+dom.com_content+"</p>";
     			temp+="<div class=\"pad-ver\">";
-	    		temp+="<a class=\"btn btn-sm\" href=\"#\">답글</a>";
-	    		temp+="</div></div></div><hr>";
+	    		temp+="<a class=\"btn btn-sm\" href=\"javascript:;\" onclick=\"replyWriteForm("+dom.com_no+","+dom.com_pnum+",'"+dom.user_id+"');\">답글</a>";
+	    		temp+="</div></div><hr><div id='replyWriteShow"+dom.com_no+"'></div> ";
 	       });
 	       $("div#replyShow").html(temp);
 	       $("textarea#replyArea").val('');
@@ -172,6 +139,26 @@
  			commentsAjax('${pageContext.request.contextPath}/comments.do',$("form#commentsForm").serialize(),'json');
  	    }); 
 	});
+	
+	function replyWriteForm(comNo, pnumNo, userID){ //답글 작성 칸 생성
+		var temp="";
+		temp+=" <div class=\"panel-body\">";
+		temp+="	<form action=\"#\" id=\"replyForm\" name=\"replyForm\" method=\"post\">";
+		temp+="	<input type=\"hidden\" name=\"post_no\" value=\"${postInfo.post_no}\">";
+		temp+="	<input type=\"hidden\" name=\"user_no\" value=\"${member.user_no}\">";
+		temp+="	<input type=\"hidden\" name=\"com_pnum\" value=\""+pnumNo+"\">";
+		temp+="	<input type=\"hidden\" name=\"com_job\" value=\"1\">";
+		temp+=" <textarea class=\"form-control\" name=\"com_content\" id=\"replyArea\" rows=\"2\">@"+userID+" </textarea>";
+		temp+="	<button class=\"write-btn reply-btn\" onclick=\"replyWriteAction();\">등록</button>";
+		temp+="	<button class=\"write-btn reply-btn\" id=\"commentbtn\" type=\"submit\">취소</button>";
+		temp+=" </form></div><hr>";
+		var show="replyWriteShow"+comNo;
+		$('div#'+show).html(temp);
+	}	
+	
+	function replyWriteAction(){
+		commentsAjax('${pageContext.request.contextPath}/comments.do',$("form#replyForm").serialize(),'json');
+	}
 	
 </script>
 </body>

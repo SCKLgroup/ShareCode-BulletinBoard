@@ -20,7 +20,13 @@ public class CommentsServiceImpl implements CommentsService{
 
 	@Override
 	public void commentsInsert(CommentsVO vo) {
-		// TODO Auto-generated method stub
+		int comNo=dao.getComSequence();
+		vo.setCom_no(comNo);
+		
+		if (vo.getCom_pnum()==0) {
+			vo.setCom_pnum(comNo);
+		}
+
 		dao.insertCommentsInfo(vo);
 	}
 
