@@ -1,35 +1,34 @@
 $(function() {
+	$("#homeForm").keypress(function(e) {
+		if (e.keyCode === 13) {
+			$("#btnLogin").click();
+		}
+	});
+
 	$("#btnLogin").click(function() {
-		USER_ID = $("#USER_ID").val();
-		var USER_PW = $("#USER_PW").val();
-		if (USER_ID == "") {
+		user_id = $("#user_id").val();
+		var user_pw = $("#user_pw").val();
+		if (user_id == "") {
 			alert("아이디를 입력하세요");
-			$("#USER_ID").focus(); // 입력포커스 이동
+			$("#user_id").focus(); // 입력포커스 이동
 
 			return; // 함수 종료
 		}
-		if (USER_PW == "") {
+		if (user_pw == "") {
 			alert("비밀번호를 입력하세요");
-			$("#USER_PW").focus();
+			$("#user_pw").focus();
 			return;
 		}
-//		// 폼 내부의 데이터를 전송할 주소
-		
-		 var form = document.getElementById("homeForm");
-		 form.action= "login.do";
-		 form.submit(); //제출
-		 
+		// // 폼 내부의 데이터를 전송할 주소
+
+		var form = document.getElementById("homeForm");
+		form.action = "login.do";
+		form.submit(); // 제출
 	});
-	
-//	function enterkey() {
-//		if (window.event.keyCode == 13) {
-//	    	// 엔터키가 눌렸을 때
-//	    }
-//	}
-	
+
 	// logout btn
-	$("#logoutBtn").on("click", function(){
+	$("#logoutBtn").on("click", function() {
 		location.href = "logout.do";
 	});
-	
+
 });

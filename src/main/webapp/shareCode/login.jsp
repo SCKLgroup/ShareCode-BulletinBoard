@@ -27,10 +27,10 @@
 					<c:if test="${member == null &&kakaoid == null}">
 						<div>
 							<span class="login_font">ID <input type="text"
-								name="USER_ID" id="USER_ID" class="user_id_pass"
+								name="user_id" id="user_id" class="user_id_pass"
 								placeholder="아이디를 입력해주세요"> <br>
 							</span> <br> <span class="login_font">PASS</span> <input
-								type="password" class="user_id_pass" name="USER_PW" id="USER_PW"
+								type="password" class="user_id_pass" name="user_pw" id="user_pw"
 								placeholder="비밀번호를 입력해주세요">
 							<button type="button" class="login_btn" id="btnLogin" >login</button>
 							<hr
