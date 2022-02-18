@@ -27,6 +27,8 @@ public class KakaoController {
         System.out.println("###access_Token#### : " + access_Token);
         System.out.println("###userInfo#### : " + userInfo.get("email"));
         System.out.println("###nickname#### : " + userInfo.get("nickname"));
-        return "redirect:list.do";
+//        return "redirect:post.do";
+		return "shareCode/list";
+
     }
 }

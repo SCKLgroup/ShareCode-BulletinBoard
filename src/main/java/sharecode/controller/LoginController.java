@@ -30,7 +30,8 @@ public class LoginController {
 			return "shareCode/list";
 		} else {
 			session.setAttribute("member", login);
-			return "redirect:list.do";
+//			return "redirect:post.do";
+			return "shareCode/list";
 		}
 	}
 
@@ -39,8 +40,8 @@ public class LoginController {
 		req.getSession().invalidate();
 		req.getSession(true);
 		
-		return "redirect:list.do";
-
+//		return "redirect:post.do";
+		return "shareCode/list";
 	}
 
 }

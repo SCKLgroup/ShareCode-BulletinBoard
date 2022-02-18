@@ -32,15 +32,14 @@
 							</span> <br> <span class="login_font">PASS</span> <input
 								type="password" class="user_id_pass" name="USER_PW" id="USER_PW"
 								placeholder="비밀번호를 입력해주세요">
-							<button type="button" class="login_btn" id="btnLogin">login</button>
+							<button type="button" class="login_btn" id="btnLogin" >login</button>
 							<hr
 								style="border: 1px color= silver; margin: 15% 0% 15% 0%; width: 100%;">
 							<a
 								href="https://kauth.kakao.com/oauth/authorize?
 								client_id=2790956db8b98f04db2d8d8df073fa48&
 								redirect_uri=http://localhost:8080/web/shareCode/home.do&
-								response_type=code"><input
-								type="image" src="img/kakao_login_medium_wide.png"
+								response_type=code"><img src="img/kakao_login_medium_wide.png"
 								style="margin-bottom:  15%;" /></a>
 						</div>
 					</c:if>
