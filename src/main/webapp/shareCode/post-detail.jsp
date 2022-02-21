@@ -52,7 +52,7 @@
 		
 			
 			<div class="form-row post-content">
-				<c:out value="${postInfo.post_content}"></c:out>
+				${postInfo.post_content}
 			</div>
 			
 			<c:catch>
@@ -80,7 +80,7 @@
 					<input type="hidden" name="user_no" value="${member.user_no}">
 					<input type="hidden" name="com_job" value="0">
 				    <textarea class="form-control" name="com_content" id="replyArea" rows="2" placeholder="댓글을 작성하세요"></textarea>
-	      			<button class="write-btn reply-btn" id="commentbtn" type="submit">등록</button>
+	      			<button type="button" class="write-btn reply-btn" id="commentbtn">등록</button>
 				</form>
 			</c:otherwise>
 		</c:choose>
@@ -122,12 +122,16 @@
 	    			temp+="<div class=\"media-body reply-block\">";
 	    		}
 	    		temp+="<div class=\"mar-btm\">";
-	    		temp+="<a href=\"#\" class=\"btn-link text-semibold media-heading box-inline\">"+dom.user_id+"</a>";
+	    		temp+="<div class=\"comment-writer\">"+dom.user_id+"</div>";
 	   			temp+="<div class=\"text-muted text-sm\">"+dom.com_date+"</div>";
 	   			temp+="</div>";
   				temp+="<p>"+dom.com_content+"</p>";
     			temp+="<div class=\"pad-ver\">";
-	    		temp+="<a class=\"btn btn-sm\" href=\"javascript:;\" onclick=\"replyWriteForm("+dom.com_no+","+dom.com_pnum+",'"+dom.user_id+"');\">답글</a>";
+	    		temp+="<button type=\"button\" class=\"reply-write\"onclick=\"replyWriteForm("+dom.com_no+","+dom.com_pnum+",'"+dom.user_id+"');\">답글</button>";
+	    		if (dom.user_no==member.user_no){
+	    			temp+="<button type=\"button\" class=\"write-btn reply-btn\" id=\"commentDelete\">삭제</button>";
+	    		}
+	    		
 	    		temp+="</div></div><hr><div id='replyWriteShow"+dom.com_no+"'></div> ";
 	       });
 	       $("div#replyShow").html(temp);
@@ -141,6 +145,7 @@
 	});
 	
 	function replyWriteForm(comNo, pnumNo, userID){ //답글 작성 칸 생성
+		replyWriteFormClose();
 		var temp="";
 		temp+=" <div class=\"panel-body\">";
 		temp+="	<form action=\"#\" id=\"replyForm\" name=\"replyForm\" method=\"post\">";
@@ -149,8 +154,8 @@
 		temp+="	<input type=\"hidden\" name=\"com_pnum\" value=\""+pnumNo+"\">";
 		temp+="	<input type=\"hidden\" name=\"com_job\" value=\"1\">";
 		temp+=" <textarea class=\"form-control\" name=\"com_content\" id=\"replyArea\" rows=\"2\">@"+userID+" </textarea>";
-		temp+="	<button class=\"write-btn reply-btn\" onclick=\"replyWriteAction();\">등록</button>";
-		temp+="	<button class=\"write-btn reply-btn\" id=\"commentbtn\" type=\"submit\">취소</button>";
+		temp+="	<button type=\"button\" class=\"write-btn reply-btn\" onclick=\"replyWriteAction();\">등록</button>";
+		temp+="	<button type=\"button\" class=\"write-btn reply-btn\" onclick=\"replyWriteFormClose();\">취소</button>";
 		temp+=" </form></div><hr>";
 		var show="replyWriteShow"+comNo;
 		$('div#'+show).html(temp);
@@ -159,6 +164,12 @@
 	function replyWriteAction(){
 		commentsAjax('${pageContext.request.contextPath}/comments.do',$("form#replyForm").serialize(),'json');
 	}
+	
+	function replyWriteFormClose(){
+		$('div#replyWriteShow').remove();
+	}
+	
+	
 	
 </script>
 </body>
