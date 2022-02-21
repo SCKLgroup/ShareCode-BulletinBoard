@@ -30,4 +30,14 @@ public class CommentsServiceImpl implements CommentsService{
 		dao.insertCommentsInfo(vo);
 	}
 
+	@Override
+	public void commentsDelete(int com_no) {
+		dao.deleteComments(com_no);
+	}
+
+	@Override
+	public void commentsUpdate(CommentsVO vo) {
+		dao.updateComments(vo);
+	}
+
 }

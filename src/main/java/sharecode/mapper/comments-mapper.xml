@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectCommentsList" parameterType="java.lang.Integer" resultType="sharecode.vo.CommentsVO">
-		SELECT COM_NO, POST_NO, C.USER_NO, USER_ID, COM_CONTENT, COM_PNUM, COM_JOB, COM_DATE
+		SELECT COM_NO, POST_NO, C.USER_NO, USER_ID, COM_CONTENT, COM_PNUM, COM_JOB, COM_DATE, COM_DEL
 		FROM COMMENTS C, USERINFO U
 		WHERE C.USER_NO = U.USER_NO
 		AND POST_NO=#{post_no}
@@ -18,7 +18,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="insertCommentsInfo" parameterType="sharecode.vo.CommentsVO">
 		INSERT INTO COMMENTS
-		VALUES(#{com_no},#{post_no},#{user_no},#{com_content},#{com_pnum},#{com_job},SYSDATE)
+		VALUES(#{com_no},#{post_no},#{user_no},#{com_content},#{com_pnum},#{com_job},SYSDATE,0)
 	</insert>
 	
+	<update id="deleteComments" parameterType="java.lang.Integer">
+		UPDATE COMMENTS SET COM_CONTENT='삭제된 댓글입니다.',COM_DEL=1
+		WHERE COM_NO=#{com_no}
+	</update>
+	
+	<update id="updateComments" parameterType="sharecode.vo.CommentsVO">
+		UPDATE COMMENTS SET COM_CONTENT=#{com_content}
+		WHERE COM_NO=#{com_no}
+	</update>
 </mapper>

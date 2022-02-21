@@ -115,7 +115,9 @@
 	
    function commentsListfunc(v){
 	      var temp="";
-	       $.each(v.commentsList,function(index,dom){
+	      var no=$("input[name=user_no]").val();
+	      
+	       $.each(v,function(index,dom){
 	    		if (dom.com_job==0){
 	    			temp+="<div class=\"media-body\">";
 	    		}else{
@@ -127,11 +129,14 @@
 	   			temp+="</div>";
   				temp+="<p>"+dom.com_content+"</p>";
     			temp+="<div class=\"pad-ver\">";
-	    		temp+="<button type=\"button\" class=\"reply-write\"onclick=\"replyWriteForm("+dom.com_no+","+dom.com_pnum+",'"+dom.user_id+"');\">답글</button>";
-	    		if (dom.user_no==member.user_no){
-	    			temp+="<button type=\"button\" class=\"write-btn reply-btn\" id=\"commentDelete\">삭제</button>";
-	    		}
-	    		
+    			if (dom.com_del==0){
+		    		temp+="<button type=\"button\" class=\"reply-write\"onclick=\"replyWriteForm("+dom.com_no+","+dom.com_pnum+",'"+dom.user_id+"');\">답글</button>";
+    				
+					if (dom.user_no==no){
+						temp+="<button type=\"button\" class=\"reply-write\"onclick=\"commentDelete("+dom.com_no+");\">삭제</button>";
+						temp+="<button type=\"button\" class=\"reply-write\"onclick=\"commentsModify("+dom.com_no+");\">수정</button>";
+		    		} 
+    			}
 	    		temp+="</div></div><hr><div id='replyWriteShow"+dom.com_no+"'></div> ";
 	       });
 	       $("div#replyShow").html(temp);
@@ -143,6 +148,14 @@
  			commentsAjax('${pageContext.request.contextPath}/comments.do',$("form#commentsForm").serialize(),'json');
  	    }); 
 	});
+	
+
+	function commentDelete(comNo){
+ 		commentsAjax('${pageContext.request.contextPath}/commentsDelete.do',{"com_no":comNo, "post_no":${postInfo.post_no}},'json');
+	}
+	function commentsModify(comNo){
+ 		commentsAjax('${pageContext.request.contextPath}/commentsModify.do',{"com_no":comNo, "post_no":${postInfo.post_no}},'json');
+	}
 	
 	function replyWriteForm(comNo, pnumNo, userID){ //답글 작성 칸 생성
 		replyWriteFormClose();
@@ -167,6 +180,23 @@
 	
 	function replyWriteFormClose(){
 		$('div#replyWriteShow').remove();
+	}
+	
+	function replyWriteForm(comNo, pnumNo, userID){ //답글 작성 칸 생성
+		replyWriteFormClose();
+		var temp="";
+		temp+=" <div class=\"panel-body\">";
+		temp+="	<form action=\"#\" id=\"replyForm\" name=\"replyForm\" method=\"post\">";
+		temp+="	<input type=\"hidden\" name=\"post_no\" value=\"${postInfo.post_no}\">";
+		temp+="	<input type=\"hidden\" name=\"user_no\" value=\"${member.user_no}\">";
+		temp+="	<input type=\"hidden\" name=\"com_pnum\" value=\""+pnumNo+"\">";
+		temp+="	<input type=\"hidden\" name=\"com_job\" value=\"1\">";
+		temp+=" <textarea class=\"form-control\" name=\"com_content\" id=\"replyArea\" rows=\"2\">@"+userID+" </textarea>";
+		temp+="	<button type=\"button\" class=\"write-btn reply-btn\" onclick=\"replyWriteAction();\">등록</button>";
+		temp+="	<button type=\"button\" class=\"write-btn reply-btn\" onclick=\"replyWriteFormClose();\">취소</button>";
+		temp+=" </form></div><hr>";
+		var show="replyWriteShow"+comNo;
+		$('div#'+show).html(temp);
 	}
 	
 	
