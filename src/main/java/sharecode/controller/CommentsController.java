@@ -42,7 +42,6 @@ public class CommentsController {
 	//댓글 수정
 	@RequestMapping(value="commentsModify.do")
 	public String commentsUpdate(CommentsVO vo) {
-		System.out.println(vo);
 		service.commentsUpdate(vo);
 		
 		return "redirect:/commentsList.do?post_no="+vo.getPost_no();
