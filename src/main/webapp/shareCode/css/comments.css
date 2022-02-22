@@ -93,3 +93,15 @@ body{
     margin-top: 15px;
     text-align: right;
 }
+.comment-writer{
+	font-weight:bold;
+	font-size: 18px;
+}
+.reply-write{
+	background-color: rgb(170 170 170 / 30%);
+    padding: 7px 10px;
+    border-radius: 0.2rem;
+    border: 0;
+    width: 50px;
+    margin-right:5px;
+}

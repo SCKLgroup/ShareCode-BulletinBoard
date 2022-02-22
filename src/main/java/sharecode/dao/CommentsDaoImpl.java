@@ -29,9 +29,24 @@ public class CommentsDaoImpl implements CommentsDao{
 	}
 
 	@Override
+	public void deleteComments(int com_no) {
+		sqlSession.update("deleteComments",com_no);
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
 	public int getComSequence() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("getComSequence");
 	}
+
+	@Override
+	public void updateComments(CommentsVO vo) {
+		// TODO Auto-generated method stub
+		sqlSession.update("updateComments",vo);
+		
+	}
+	
 
 }
