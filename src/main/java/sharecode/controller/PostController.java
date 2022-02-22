@@ -72,11 +72,14 @@ public class PostController {
 	@RequestMapping(value="shareCode/list.do", method = RequestMethod.GET) // 관리자 페이지에서 상품 뿌리기  
 	@ResponseBody
 	public Map<String, Object> ajaxListAction(String job) {
+		if (job == null) {
+			job = "all";
+		}
 		System.out.println(job);
 		HashMap<String, Object> jobs=new HashMap<String, Object>();
 		jobs.put("job", job);
 		Map<String, Object> map=new HashMap<String, Object>();
-		if(!job.equals("default")) {
+		if(!job.equals("all")) {
 			map.put("slang", postService.ajaxlistAction(jobs));
 			return map;
 		}  else {

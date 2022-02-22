@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="css/list.css" type="text/css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-
 	var cate="";
 	
 	$(window).bind("pageshow", function (event) {
@@ -21,31 +20,35 @@
         }
     });
 	
-	ajaxData('/web/shareCode/list.do', {
-		"job" : "default"
-	}, 'json'); //전체리스트 출력
+	selectAjax();
 	
-	
-
 	function selectAjax() {
-		ajaxData('/web/shareCode/list.do', {
-			"job" : $(".languageSelect option:selected").val(),
- 		}, 'json');
-	}
-
-	function ajaxData(url, data, dataType) {
 		$.ajax({
-			url : url,
+			url : '/web/shareCode/list.do',
 			data : {
-				data,
-				'board_id' : board_id,
-				'page' : pageNum
-			}
-			dataType : dataType,
+				"job" : $(".languageSelect option:selected").val()
+			},
+			dataType : 'json',
 			success : function(v) {
-				list(v);
-				console.log(cate);
-				console.log(v);
+				var temp = "";
+				$.each(v.slang, function(index, dom) {
+					
+					temp += "<tr onClick=\"location.href='postInfo.do?post_no="+dom.post_no+"'\">";
+					temp += "<td>"+dom.post_category+"</td>";
+					temp += "<td>"+dom.post_title+"</td>";
+					temp += "<td>"+dom.user_no+"</td>";
+					temp += "<td>"+dom.post_date+"</td>";
+					temp += "<td>"+dom.post_hit+"</td>";
+					temp += "</tr>"
+					
+					cate = dom.post_category; //카테고리 선택된것
+					
+				});
+				$("#tblist").html(temp);
+				var startNum=$("#tblist tr").length;
+				console.log("선택된 카테고리 : ",cate);
+				console.log("리스트 갯수 : ",startNum);
+				
 			},
 			error : function(e) {
 				alert('에이젝스에서 에러뜬다' + e);
@@ -56,27 +59,6 @@
 	
 
 
-	function list(v) {
-		var temp = "";
-		$.each(v.slang, function(index, dom) {
-			
-			temp += "<tr onClick=\"location.href='postInfo.do?post_no="+dom.post_no+"'\">";
-			temp += "<td>"+dom.post_category+"</td>";
-			temp += "<td>"+dom.post_title+"</td>";
-			temp += "<td>"+dom.user_no+"</td>";
-			temp += "<td>"+dom.post_date+"</td>";
-			temp += "<td>"+dom.post_hit+"</td>";
-			temp += "</tr>"
-			
-			cate = dom.post_category;
-		});
-		
-		$("#tblist").html(temp);
-	}
-
-	$(function() {
-
-	});
 </script>
 </head>
 <body>
@@ -95,14 +77,13 @@
 				</colgroup>
 				<thead>
 					<select class="languageSelect" onchange="selectAjax()">
-					<option value="default" selected>전체 </option>
+					<option value="all" selected>전체 </option>
 					<option id="category" value="Java">Java</option>
 						<option id="category" value="C++">C++</option>
 						<option id="category" value="Python">Python</option>
 					</select>
 					<tr>
 						<th scope="col">글번호</th>
-						<!--  <th scope="col"><select><option value="python">python</option><option value="java">Java</option></select></th> -->
 						<th scope="col">글제목</th>
 						<th scope="col">작성자</th>
 						<th scope="col">작성일</th>
