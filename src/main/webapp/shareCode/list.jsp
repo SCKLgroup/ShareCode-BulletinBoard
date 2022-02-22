@@ -12,23 +12,39 @@
 
 	var cate="";
 	
+	$(window).bind("pageshow", function (event) {
+        if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
+            console.log(job);
+            
+        } else {
+            console.log('새로 열린 페이지');
+        }
+    });
+	
 	ajaxData('/web/shareCode/list.do', {
 		"job" : "default"
 	}, 'json'); //전체리스트 출력
+	
+	
 
 	function selectAjax() {
 		ajaxData('/web/shareCode/list.do', {
-			"job" : $(".languageSelect option:selected").val()
-		}, 'json');
+			"job" : $(".languageSelect option:selected").val(),
+ 		}, 'json');
 	}
 
 	function ajaxData(url, data, dataType) {
 		$.ajax({
 			url : url,
-			data : data,
+			data : {
+				data,
+				'board_id' : board_id,
+				'page' : pageNum
+			}
 			dataType : dataType,
 			success : function(v) {
 				list(v);
+				console.log(cate);
 				console.log(v);
 			},
 			error : function(e) {
@@ -37,20 +53,22 @@
 
 		});
 	}
+	
+
 
 	function list(v) {
 		var temp = "";
 		$.each(v.slang, function(index, dom) {
 			
 			temp += "<tr onClick=\"location.href='postInfo.do?post_no="+dom.post_no+"'\">";
-			temp += "<td>"+dom.post_no+"</td>";
+			temp += "<td>"+dom.post_category+"</td>";
 			temp += "<td>"+dom.post_title+"</td>";
 			temp += "<td>"+dom.user_no+"</td>";
 			temp += "<td>"+dom.post_date+"</td>";
 			temp += "<td>"+dom.post_hit+"</td>";
 			temp += "</tr>"
 			
-			
+			cate = dom.post_category;
 		});
 		
 		$("#tblist").html(temp);
@@ -80,6 +98,7 @@
 					<option value="default" selected>전체 </option>
 					<option id="category" value="Java">Java</option>
 						<option id="category" value="C++">C++</option>
+						<option id="category" value="Python">Python</option>
 					</select>
 					<tr>
 						<th scope="col">글번호</th>

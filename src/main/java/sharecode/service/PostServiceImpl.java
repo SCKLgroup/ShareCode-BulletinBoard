@@ -54,5 +54,6 @@ public class PostServiceImpl implements PostService {
 	public List<PostVO> ajaxalllistAction(HashMap<String, Object> jobs){
 		return dao.ajaxallSelectCategory(jobs);
 	}
+	
 
 }
