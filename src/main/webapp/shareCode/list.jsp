@@ -72,6 +72,15 @@
 <script type="text/javascript">
 	
 	
+	/* $(window).bind("pageshow", function (event) {
+        if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
+            console.log(job);
+            
+        } else {
+            console.log('새로 열린 페이지');
+        }
+    }); */
+	
    	var cate = "";
 	var url = "/web/shareCode/";
 	
