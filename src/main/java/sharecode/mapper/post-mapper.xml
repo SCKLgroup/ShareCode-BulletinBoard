@@ -37,6 +37,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE POST_CATEGORY= #{value}
 	</select>
 	
+	<select id="selectLangAllCategory" parameterType="String" resultType="sharecode.vo.PostVO"> <!--카테고리찾기  -->
+		SELECT
+		POST_NO,USER_NO,POST_TITLE,POST_CONTENT,POST_CATEGORY,POST_HIT,POST_DATE
+		FROM POST
+	</select>
+	
+	
 	<select id="ajaxselectLangCategory" parameterType="HashMap" resultType="sharecode.vo.PostVO"> <!--카테고리찾기  -->
 		SELECT
 		POST_NO,USER_NO,POST_TITLE,POST_CONTENT,POST_CATEGORY,POST_HIT,POST_DATE

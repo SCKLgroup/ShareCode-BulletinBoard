@@ -24,7 +24,7 @@
 <body>
 	<header class="header">
 
-		<a href="/web/shareCode/list.jsp" class="logo">ShareCode</a> <input class="menu-btn"
+		<a href="/web/shareCode/list.do?category=all" class="logo">ShareCode</a> <input class="menu-btn"
 			type="checkbox" id="menu-btn" /> <label class="menu-icon"
 			for="menu-btn"><span class="navicon"></span></label>
 

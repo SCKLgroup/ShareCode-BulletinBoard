@@ -1,15 +1,9 @@
 package sharecode.controller;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sharecode.service.PostService;
@@ -57,42 +51,22 @@ public class PostController {
 		return "redirect:/shareCode/postInfo.do";
 	}
 
-	/*
-	 * @RequestMapping(value = "shareCode/list.do") public String
-	 * mainlistAction(Model model,String category) {
-	 * 
-	 * model.addAttribute("selectLang", postService.listAction("C++"));
-	 * System.out.println(model.addAttribute("selectLang",
-	 * postService.listAction("Java"))); System.out.println("포스트컨트롤러의 메인리스트 실행");
-	 * 
-	 * return "/shareCode/list"; }
-	 */
-
-	@RequestMapping(value = "shareCode/list.do", method = RequestMethod.GET) // 관리자 페이지에서 상품 뿌리기
-	@ResponseBody
-	public Map<String, Object> ajaxListAction(String job,String category) {
-//		
+	@RequestMapping(value = "shareCode/list.do")
+	public String mainlistAction(Model model, String category,int page) {
 		System.out.println(category);
-		System.out.println(job);
-		HashMap<String, Object> jobs = new HashMap<String, Object>();
-		jobs.put("job", category);
-		Map<String, Object> map = new HashMap<String, Object>();
-		if (!job.equals("all")) {
-			map.put("slang", postService.ajaxlistAction(jobs));
-			System.out.println("*******iter******");
-			
-			Iterator<String> keys = map.keySet().iterator();
-	        while( keys.hasNext() ){
-	            String key = keys.next();
-	            Object value = map.get(key);
-	            System.out.println("키 : "+key+", 값 : "+value);
-	            
-	        }
-		
-			return map;
+		if (category.equals("all")) {
+			model.addAttribute("selectLang", postService.alllistAction());
 		} else {
-			map.put("slang", postService.ajaxalllistAction(jobs));
-			return map;
+			model.addAttribute("selectLang", postService.listAction(category));
 		}
+//		System.out.println(model.addAttribute("selectLang", postService.listAction("Java")));
+		System.out.println("포스트컨트롤러의 메인리스트 실행");
+		if (category.equals("C++")) {
+			category="C%2B%2B";
+		}
+		model.addAttribute("category",category);
+
+		return "/shareCode/list";
 	}
+
 }

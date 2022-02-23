@@ -48,6 +48,13 @@ public class PostServiceImpl implements PostService {
 	}
 	
 	@Override
+	public List<PostVO> alllistAction() {
+		System.out.println("포스트서비스임플리먼트 실행");
+		System.out.println(dao.selectLangAllCategory());
+		return dao.selectLangAllCategory();
+	}
+	
+	@Override
 	public List<PostVO> ajaxlistAction(HashMap<String, Object> jobs){
 		return dao.ajaxSelectCategory(jobs);
 	}
@@ -56,6 +63,7 @@ public class PostServiceImpl implements PostService {
 	public List<PostVO> ajaxalllistAction(HashMap<String, Object> jobs){
 		return dao.ajaxallSelectCategory(jobs);
 	}
+
 	
 
 }

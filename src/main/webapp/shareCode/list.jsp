@@ -11,6 +11,7 @@
 
 </head>
 <body>
+
 	<jsp:include page="header.jsp" />
 
 	<div class="inner_cont">
@@ -26,12 +27,14 @@
 					<col width="30">
 				</colgroup>
 				<thead>
-					<select name="catego" class="languageSelect" onchange="test(this.value)">
-						<option id="category" value="all">전체</option>
-						<option id="category" value="Java">Java</option>
-						<option id="category" value="C%2B%2B">C++</option>
-						<option id="category" value="Python">Python</option>
-					</select>
+					
+						<select name="category" class="languageSelect" onchange="categorySubmit(this.value)">
+							<option id="category" value="all">전체</option>
+							<option id="category" value="Java">Java</option>
+							<option id="category" value="C%2B%2B">C++</option>
+							<option id="category" value="Python">Python</option>
+						</select>
+					
 					<tr>
 						<th scope="col">글번호</th>
 						<th scope="col">카테고리</th>
@@ -42,7 +45,16 @@
 					</tr>
 				</thead>
 				<tbody id="tblist">
-
+					<c:forEach var="i" items="${selectLang}" varStatus="cnt">
+						<tr onclick="location.href='postInfo.do?post_no=${i.post_no}'">
+							<td>${i.post_no}</td>
+							<td>${i.post_category}</td>
+							<td>${i.post_title}</td>
+							<td>${i.user_no}</td>
+							<td>${i.post_date}</td>
+							<td>${i.post_hit}</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 
 
@@ -69,59 +81,15 @@
 	</div>
 
 	<script type="text/javascript">
-	
-
-	
-   	var cate = "";
-	var url = "/web/shareCode/";
-	
-	test($("select[name=catego]").val());
-	function test(cate){
-		var urlStorage = "list.do?category="+cate;
-		ajaxData(url+urlStorage, {"job" : cate}, 'json')
-		console.log(cate);
-		console.log(url+urlStorage);
-	
-	}
-	
-	
-	function ajaxData(url,data,dataType) {
-		$.ajax({
-			url : url,
-			data : data,
-			dataType : dataType,
-			success : function(v) {
-				console.log(url);
-				
-				var temp='';
-				$.each(v.slang, function(index, dom) {
-					
-					temp += "<tr onClick=\"location.href='postInfo.do?post_no="+dom.post_no+"'\">";
-					temp += "<td>"+dom.post_category+"</td>";
-					temp += "<td>"+dom.post_title+"</td>";
-					temp += "<td>"+dom.user_no+"</td>";
-					temp += "<td>"+dom.post_date+"</td>";
-					temp += "<td>"+dom.post_hit+"</td>";
-					temp += "</tr>"
-					
-					cate = dom.post_category; //카테고리 선택된것
-					
-				});
-				
-				$("#tblist").html(temp);
-				var startNum=$("#tblist tr").length;
-				console.log("선택된 카테고리 : ",cate);
-				console.log("리스트 갯수 : ",startNum);
-				
-			},
-			error : function(e) {
-				alert('에이젝스에서 에러뜬다' + e);
-			}
-
-		});
+	function categorySubmit(event){
+		console.log(event);
+		window.location.href='/web/shareCode/list.do?category='+event+'&page=1';
 		
 		
 	}
+	
+	$("select[name='category']").val("${category}").prop("selected", true);
+	
 	
 	function postWrite(){
 		if(${member.user_no == null}){
@@ -129,7 +97,7 @@
 			return
 		}
 		window.location.href = 'post-write.jsp';
-	}
+	} 
 	
 	
 	
