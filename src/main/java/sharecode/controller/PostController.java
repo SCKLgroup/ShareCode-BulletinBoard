@@ -1,7 +1,7 @@
 package sharecode.controller;
 
-
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,44 +20,43 @@ public class PostController {
 
 	@Autowired
 	PostService postService;
-	
+
 	@RequestMapping(value = "shareCode/post.do")
 	public String postInsertAction(PostVO vo) {
 		postService.postInsertAction(vo);
-		
+
 		return "/shareCode/list";
 	}
-	
+
 	@RequestMapping(value = "shareCode/postInfo.do")
 	public String postInfoSelect(int post_no, Model model) {
-		model.addAttribute("postInfo",postService.postInfoSelect(post_no));
-		
+		model.addAttribute("postInfo", postService.postInfoSelect(post_no));
+
 		return "/shareCode/post-detail";
 	}
-	
-	
+
 	@RequestMapping(value = "shareCode/postModifyInfo.do")
 	public String postModifyInfoSelect(int post_no, Model model) {
-		model.addAttribute("postInfo",postService.postInfoSelect(post_no));
-		
+		model.addAttribute("postInfo", postService.postInfoSelect(post_no));
+
 		return "/shareCode/post-modify";
 	}
-	
+
 	@RequestMapping(value = "shareCode/postDelete.do")
 	public String postDelete(int post_no) {
 		postService.postDelete(post_no);
-	
+
 		return "redirect:/shareCode/list.jsp";
 	}
-	
+
 	@RequestMapping(value = "shareCode/postModify.do")
-	public String postInfoUpdate(PostVO vo,RedirectAttributes redirect) {
+	public String postInfoUpdate(PostVO vo, RedirectAttributes redirect) {
 		postService.postInfoUpdate(vo);
-		redirect.addAttribute("post_no",vo.getPost_no());
-		
+		redirect.addAttribute("post_no", vo.getPost_no());
+
 		return "redirect:/shareCode/postInfo.do";
 	}
-	
+
 	/*
 	 * @RequestMapping(value = "shareCode/list.do") public String
 	 * mainlistAction(Model model,String category) {
@@ -68,21 +67,30 @@ public class PostController {
 	 * 
 	 * return "/shareCode/list"; }
 	 */
-	
-	@RequestMapping(value="shareCode/list.do", method = RequestMethod.GET) // 관리자 페이지에서 상품 뿌리기  
+
+	@RequestMapping(value = "shareCode/list.do", method = RequestMethod.GET) // 관리자 페이지에서 상품 뿌리기
 	@ResponseBody
-	public Map<String, Object> ajaxListAction(String job) {
-		if (job == null) {
-			job = "all";
-		}
+	public Map<String, Object> ajaxListAction(String job,String category) {
+//		
+		System.out.println(category);
 		System.out.println(job);
-		HashMap<String, Object> jobs=new HashMap<String, Object>();
-		jobs.put("job", job);
-		Map<String, Object> map=new HashMap<String, Object>();
-		if(!job.equals("all")) {
+		HashMap<String, Object> jobs = new HashMap<String, Object>();
+		jobs.put("job", category);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (!job.equals("all")) {
 			map.put("slang", postService.ajaxlistAction(jobs));
+			System.out.println("*******iter******");
+			
+			Iterator<String> keys = map.keySet().iterator();
+	        while( keys.hasNext() ){
+	            String key = keys.next();
+	            Object value = map.get(key);
+	            System.out.println("키 : "+key+", 값 : "+value);
+	            
+	        }
+		
 			return map;
-		}  else {
+		} else {
 			map.put("slang", postService.ajaxalllistAction(jobs));
 			return map;
 		}
