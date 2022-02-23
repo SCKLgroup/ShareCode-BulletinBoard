@@ -65,7 +65,6 @@
 		}
 		
 		$("textarea[name='post_content']").val(content.replace(/(?:\r\n|\r|\n)/gm, '<br />'));
-		//content = str.replace(/\\r\\n|\\n|\\r/gm,"<br>")		
 
 		$("form").submit();
 	});

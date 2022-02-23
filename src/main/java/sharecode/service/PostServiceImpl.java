@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import sharecode.dao.CommentsDao;
 import sharecode.dao.PostDao;
 import sharecode.vo.PostVO;
 
@@ -13,6 +14,7 @@ import sharecode.vo.PostVO;
 public class PostServiceImpl implements PostService {
 	@Autowired
 	PostDao dao;
+	CommentsDao comDao;
 
 	@Override
 	public void postInsertAction(PostVO vo) {
@@ -27,13 +29,13 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public void postDelete(int post_no) {
-		// TODO Auto-generated method stub
 		dao.deletePost(post_no);
+		comDao.deletePostComments(post_no);
+		
 	}
 
 	@Override
 	public void postInfoUpdate(PostVO vo) {
-		// TODO Auto-generated method stub
 		dao.updatePostInfo(vo);
 	}
 

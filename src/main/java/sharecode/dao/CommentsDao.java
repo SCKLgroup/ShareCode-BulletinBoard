@@ -10,4 +10,5 @@ public interface CommentsDao {
 	public int getComSequence();
 	public void deleteComments(int com_no);
 	public void updateComments(CommentsVO vo);
+	public void deletePostComments(int post_no);
 }

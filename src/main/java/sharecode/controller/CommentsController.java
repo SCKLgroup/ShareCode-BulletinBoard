@@ -19,6 +19,7 @@ public class CommentsController {
 	//댓글 작성
 	@RequestMapping(value="commentsReg.do")
 	public String commentsInsert(CommentsVO vo) {
+		System.out.println(vo);
 		service.commentsInsert(vo);
 
 		return "redirect:/commentsList.do?post_no="+vo.getPost_no();

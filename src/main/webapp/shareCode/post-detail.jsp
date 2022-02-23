@@ -128,7 +128,7 @@
 	      
 	      var temp="";
 	       $.each(v,function(index,dom){
-	    	  	temp+="<div id='commentsLoc"+dom.com_no+"'>";
+	    	  	temp+="<div class=\"comments-block\" id='commentsLoc"+dom.com_no+"'>";
 	    	  
 	    		if (dom.com_job==0){ //댓글(0) 답글(1) 여부 확인
 	    			temp+="<div class=\"media-body\">";
@@ -151,7 +151,7 @@
 		    		} 
     			}
     			
-	    		temp+="</div></div><hr></div>";
+	    		temp+="</div></div></div>";
 	    		temp+="<div id='replyShow"+dom.com_no+"'></div>";
 	       });
 	       
@@ -160,19 +160,24 @@
 	   }
 	
 	function replyWriteForm(comNo, pnumNo, userID){ //답글 작성 칸 생성
+		if(${member.user_no == null}){
+			alert('로그인 후 이용해주세요');
+			return
+		}
+	
 		replyWriteFormClose();
 
 		var temp="";
-		temp+=" <div class=\"panel-body\" id=\"replyArea\">";
+		temp+=" <div class=\"panel-body comments-block\" id=\"replyArea\">";
 		temp+="	<form action=\"#\" id=\"replyForm\" name=\"replyForm\" method=\"post\">";
 		temp+="	<input type=\"hidden\" name=\"post_no\" value=\"${postInfo.post_no}\">";
 		temp+="	<input type=\"hidden\" name=\"user_no\" value=\"${member.user_no}\">";
 		temp+="	<input type=\"hidden\" name=\"com_pnum\" value=\""+pnumNo+"\">";
 		temp+="	<input type=\"hidden\" name=\"com_job\" value=\"1\">";
-		temp+=" <textarea class=\"form-control\" name=\"com_content\">@"+userID+" </textarea>";
+		temp+=" <textarea class=\"form-control\" name=\"com_content\" id=\"test\">@"+userID+" </textarea>";
 		temp+="	<button type=\"button\" class=\"write-btn reply-btn\" onclick=\"replyReg();\">등록</button>";
 		temp+="	<button type=\"button\" class=\"write-btn reply-btn\" onclick=\"replyWriteFormClose();\">취소</button>";
-		temp+=" </form><hr></div>";
+		temp+=" </form></div>";
 		
 		$('div#replyShow'+comNo).html(temp);
 	}	
@@ -187,6 +192,11 @@
 	}
 
 	function replyReg(){ //답글 작성 완료
+		//var com=$("textarea[name='com_content']").val();
+		//var com=$("textarea[name='com_content']").val();
+		var com=$("textarea#test").val();
+		$("textarea#test").val(com.replace(/(?:\r\n|\r|\n)/gm, '<br />'));
+	
 		commentsAjax('${pageContext.request.contextPath}/commentsReg.do',$("form#replyForm").serialize(),'json');
 	}
 	
@@ -196,14 +206,14 @@
 		modifyFormClose(comNo); 
 		
  		var temp="";
-		temp+=" <div class=\"panel-body\" id=\"modifyForm\">";
+		temp+=" <div class=\"panel-body comments-block\" id=\"modifyForm\">";
 		temp+="	<form action=\"#\" id=\"modifyForm\" name=\"modifyForm\" method=\"post\">";
 		temp+="	<input type=\"hidden\" name=\"post_no\" value=\"${postInfo.post_no}\">";
 		temp+="	<input type=\"hidden\" name=\"com_no\" value=\""+comNo+"\">";
 		temp+=" <textarea class=\"form-control\" name=\"com_content\" id=\"replyArea\">"+comCon+"</textarea>";
 		temp+="	<button type=\"button\" class=\"write-btn reply-btn\" onclick=\"commentsModify();\">수정</button>";
 		temp+="	<button type=\"button\" class=\"write-btn reply-btn\" onclick=\"modifyFormClose();\">취소</button>";
-		temp+=" </form><hr></div>";
+		temp+=" </form></div>";
 		
 		$('div#replyShow'+comNo).append(temp);
 		beforeComNo=comNo;

@@ -34,6 +34,7 @@
 				$.each(v.slang, function(index, dom) {
 					
 					temp += "<tr onClick=\"location.href='postInfo.do?post_no="+dom.post_no+"'\">";
+					temp += "<td>"+dom.post_no+"</td>";
 					temp += "<td>"+dom.post_category+"</td>";
 					temp += "<td>"+dom.post_title+"</td>";
 					temp += "<td>"+dom.user_no+"</td>";
@@ -57,6 +58,14 @@
 		});
 	}
 	
+	function postWrite(){
+		if(${member.user_no == null}){
+			alert('로그인 후 이용해주세요');
+			return
+		}
+		window.location.href = 'post-write.jsp';
+	}
+	
 
 
 </script>
@@ -69,6 +78,7 @@
 			<table>
 				<caption>게시판 리스트</caption>
 				<colgroup>
+					<col width="30">
 					<col width="30">
 					<col width="180">
 					<col width="50">
@@ -84,6 +94,7 @@
 					</select>
 					<tr>
 						<th scope="col">글번호</th>
+						<th scope="col">카테고리</th>
 						<th scope="col">글제목</th>
 						<th scope="col">작성자</th>
 						<th scope="col">작성일</th>
@@ -113,7 +124,7 @@
 			</table>
 		</div>
 		<div class="btn-div">
-			<button class="write-btn" type="button" onclick="location.href='post-write.jsp'">글작성</button>
+			<button class="write-btn" type="button" onclick="postWrite();">글작성</button>
 		</div>
 
 		<div class="container xlarge">
