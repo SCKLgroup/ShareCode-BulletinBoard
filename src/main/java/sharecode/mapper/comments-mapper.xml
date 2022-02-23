@@ -30,4 +30,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE COMMENTS SET COM_CONTENT=#{com_content}
 		WHERE COM_NO=#{com_no}
 	</update>
+	
+	<delete id="deletePostComments" parameterType="java.lang.Integer">
+		DELETE FROM COMMENTS
+		WHERE
+		POST_NO=#{post_no}
+	</delete>
 </mapper>

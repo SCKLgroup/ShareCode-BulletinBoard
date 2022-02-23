@@ -16,8 +16,10 @@ public class CommentsController {
 	@Autowired
 	CommentsService service;
 
-	@RequestMapping(value="comments.do")
+	//댓글 작성
+	@RequestMapping(value="commentsReg.do")
 	public String commentsInsert(CommentsVO vo) {
+		System.out.println(vo);
 		service.commentsInsert(vo);
 
 		return "redirect:/commentsList.do?post_no="+vo.getPost_no();
@@ -30,6 +32,7 @@ public class CommentsController {
 		return service.commentsList(post_no);
 	}
 	
+	//댓글 삭제
 	@RequestMapping(value="commentsDelete.do")
 	public String commentsDelete(int com_no,int post_no) {
 		service.commentsDelete(com_no);
@@ -37,6 +40,7 @@ public class CommentsController {
 		return "redirect:/commentsList.do?post_no="+post_no;
 	}
 	
+	//댓글 수정
 	@RequestMapping(value="commentsModify.do")
 	public String commentsUpdate(CommentsVO vo) {
 		service.commentsUpdate(vo);

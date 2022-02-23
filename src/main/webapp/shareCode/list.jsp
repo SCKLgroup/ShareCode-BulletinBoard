@@ -19,6 +19,7 @@
 				<caption>게시판 리스트</caption>
 				<colgroup>
 					<col width="30">
+					<col width="30">
 					<col width="180">
 					<col width="50">
 					<col width="50">
@@ -26,33 +27,34 @@
 				</colgroup>
 				<thead>
 					<select name="catego" class="languageSelect" onchange="test(this.value)">
-					<option id="category" value="all">전체 </option>
-					<option id="category" value="Java">Java</option>
+						<option id="category" value="all">전체</option>
+						<option id="category" value="Java">Java</option>
 						<option id="category" value="C%2B%2B">C++</option>
 						<option id="category" value="Python">Python</option>
 					</select>
 					<tr>
 						<th scope="col">글번호</th>
+						<th scope="col">카테고리</th>
 						<th scope="col">글제목</th>
 						<th scope="col">작성자</th>
 						<th scope="col">작성일</th>
 						<th scope="col">조회수</th>
 					</tr>
 				</thead>
-					<tbody id ="tblist">
-				
+				<tbody id="tblist">
+
 				</tbody>
-			
+
 
 
 			</table>
 		</div>
 		<div class="btn-div">
-			<button class="write-btn" type="button" onclick="location.href='post-write.jsp'">글작성</button>
+			<button class="write-btn" type="button" onclick="postWrite();">글작성</button>
 		</div>
 
 		<div class="container xlarge">
-			<div class="pagination" id ="pageList">
+			<div class="pagination" id="pageList">
 				<!-- <ul>
 					<li><a href="#">PREVIOUS</a></li>
 					<li><a href="#">1</a></li>
@@ -66,20 +68,9 @@
 		</div>
 	</div>
 
-</body>
-</html>
+	<script type="text/javascript">
+	
 
-<script type="text/javascript">
-	
-	
-	/* $(window).bind("pageshow", function (event) {
-        if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
-            console.log(job);
-            
-        } else {
-            console.log('새로 열린 페이지');
-        }
-    }); */
 	
    	var cate = "";
 	var url = "/web/shareCode/";
@@ -132,8 +123,19 @@
 		
 	}
 	
+	function postWrite(){
+		if(${member.user_no == null}){
+			alert('로그인 후 이용해주세요');
+			return
+		}
+		window.location.href = 'post-write.jsp';
+	}
+	
 	
 	
 
 
 </script>
+
+</body>
+</html>
