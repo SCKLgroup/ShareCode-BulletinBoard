@@ -23,7 +23,7 @@ public class PostController {
 	public String postInsertAction(PostVO vo) {
 		postService.postInsertAction(vo);
 
-		return "/shareCode/list";
+		return "redirect:/shareCode/list.do";
 	}
 
 	@RequestMapping(value = "shareCode/postInfo.do")
@@ -44,7 +44,7 @@ public class PostController {
 	public String postDelete(int post_no) {
 		postService.postDelete(post_no);
 
-		return "redirect:/shareCode/list.jsp";
+		return "redirect:/shareCode/list.do";
 	}
 
 	@RequestMapping(value = "shareCode/postModify.do")

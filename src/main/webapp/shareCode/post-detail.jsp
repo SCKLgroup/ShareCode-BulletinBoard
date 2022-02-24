@@ -130,7 +130,7 @@
 			return;
 		}
 		commentsAjax('${pageContext.request.contextPath}/commentsReg.do',$("form#commentsForm").serialize(),'json');
-	   }); 
+	}); 
 	
 	
 	//댓글 내용 확인
@@ -138,7 +138,7 @@
 		var content=$("textarea[name='"+tmp+"']").val();
 		
 		if(content.replace(/\s/g,'').length==0){
-			alert('내용을 작성하세요')
+			alert('내용을 작성하세요');
 			return false;
 		}
 		
@@ -203,7 +203,7 @@
 	
 	//답글 작성 칸 생성
 	function replyWriteForm(comNo, pnumNo, userID){ 
-		if(nowUserNo == null}){
+		if(nowUserNo == null){
 			alert('로그인 후 이용해주세요');
 			return
 		}
