@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import sharecode.service.CommentsService;
 import sharecode.service.PostService;
 import sharecode.vo.PostVO;
 
@@ -20,6 +21,7 @@ public class PostController {
 
 	@Autowired
 	PostService postService;
+
 	
 	@RequestMapping(value = "shareCode/post.do")
 	public String postInsertAction(PostVO vo) {
@@ -46,7 +48,7 @@ public class PostController {
 	@RequestMapping(value = "shareCode/postDelete.do")
 	public String postDelete(int post_no) {
 		postService.postDelete(post_no);
-	
+		
 		return "redirect:/shareCode/list.jsp";
 	}
 	

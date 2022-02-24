@@ -33,12 +33,13 @@
 				
 				<div class="form-row">
 					<span class="title writing">제&emsp;&ensp;&nbsp;목</span> 
-					<input type="text" name="post_title" class="write" value="<c:out value="${postInfo.post_title}"></c:out>"/>
+					<input type="text" name="post_title2" class="write" value="<c:out value='${postInfo.post_title}' escapeXml="false"/>"/>
+					<span style=display:none><input type="text" name="post_title"/></span>
 				</div>
 				
 				<div class="form-row">
 					<span class="title writing title-content">내&emsp;&ensp;&nbsp;용</span>
-					<textarea name="content" class="write"><c:out value="${postInfo.post_content}"></c:out></textarea>
+					<textarea name="post_content2" class="write"><c:out value="${postInfo.post_content}" escapeXml="false"/></textarea>
 					<span style=display:none><textarea name="post_content"></textarea></span>
 				</div>
 				
@@ -50,26 +51,49 @@
 	</div>
 	
 <script type="text/javascript">
+	$("#post_category").val("${postInfo.post_category}").prop("selected", true);
 
+	
 	$("button#btn-submit").click(function(){ //확인 버튼 클릭 시
-		var title=$("input[name='post_title']").val();
+		var title=$("input[name='post_title2']").val();
+		var content=$("textarea[name='post_content2']").val();
 		
 		if(title.replace(/\s/g,'').length==0){
 			alert('제목을 입력하세요')
 			return false;
 		}
-		var content=$("textarea[name='content']").val();
+		
 		if(content.replace(/\s/g,'').length==0){
 			alert('내용을 입력하세요')
 			return false;
 		}
+		 
+		title = escapeHtml(title);
+		content = escapeHtml(content);
 		
-		$("textarea[name='post_content']").val(content.replace(/(?:\r\n|\r|\n)/gm, '<br />'));
+		$("input[name='post_title']").val(title);
+		$("textarea[name='post_content']").val(content);
 
 		$("form").submit();
 	});
 	
-	$("#post_category").val("${postInfo.post_category}").prop("selected", true); 
+	//escape 처리
+	var entityMap = {
+		'&' : '&amp;',
+		'<': '&lt;',
+		'>' : '&gt;',
+		'"' : '&quot;',
+		"'" : '&#39;',
+		'/' : '&#x2F;',
+		'`' : '&#x60;',
+		'=' : '&#x3D;'
+	};
+	
+	function escapeHtml(string) {
+		return String(string).replace(/[&<>"'`=\/]/g, function(s) {
+			return entityMap[s];
+		});
+	}
 	
 	
 </script>
