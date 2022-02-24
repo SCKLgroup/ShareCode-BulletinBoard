@@ -55,7 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="countList" parameterType="String" resultType="int"> <!-- 카테고리별 리스트 수 -->
 		SELECT COUNT(*) FROM POST
 		<if test='!#{value}.equals("all")'>
-   		WHERE POST_CATEGORY =#{value}
+			WHERE POST_CATEGORY =#{value}
 		</if>
 	</select>
 
@@ -66,8 +66,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		POST_NO,USER_NO,POST_TITLE,POST_CONTENT,POST_CATEGORY,POST_HIT,POST_DATE,
 		ROW_NUMBER() OVER(ORDER BY POST_NO DESC) AS RNUM
 		FROM POST
-		WHERE
-		POST_CATEGORY=#{category})
+		<if test='!#{value}.equals("all")'>
+			WHERE
+			POST_CATEGORY=#{category})
+		</if>
 		WHERE RNUM BETWEEN ${start} AND ${end}
 
 	</select>

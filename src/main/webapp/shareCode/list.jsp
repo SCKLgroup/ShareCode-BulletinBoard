@@ -108,9 +108,7 @@
 	
 	
 	function categorySubmit(event){
-		console.log(event);
 		window.location.href='/web/shareCode/list.do?category='+event+'&page=1';
-		
 		
 	}
 	

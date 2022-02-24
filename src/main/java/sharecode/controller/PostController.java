@@ -56,7 +56,9 @@ public class PostController {
 	}
 
 	@RequestMapping(value = "shareCode/list.do")
-	public String mainlistAction(Model model, @RequestParam(value = "category", defaultValue = "all") String category,@RequestParam(value = "page", defaultValue = "1") int page) {
+	public String mainlistAction(Model model, @RequestParam(value = "category", defaultValue = "all") String category,
+			@RequestParam(value = "page", defaultValue = "1") int page) {
+
 		System.out.println(category);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
@@ -68,7 +70,7 @@ public class PostController {
 		map.put("startPage", vo.getStartPage());
 		map.put("endPage", vo.getEndPage());
 		map.put("category", category);
-		
+
 		System.out.println(vo.getStartPage());
 		System.out.println(vo.getEndPage());
 		System.out.println(vo.getTotalPage());
@@ -79,12 +81,16 @@ public class PostController {
 		} else {
 			model.addAttribute("selectLang", postService.listAction(map));
 			model.addAttribute("pageList", map);
+			
+			
 		}
-
-
+		
 		if (category.equals("C++")) {
 			category = "C%2B%2B";
+		}else if (category.equals("C#")) {
+			category = "C%23";
 		}
+		System.out.println("카테고리 무엇" + category);
 		model.addAttribute("category", category);
 
 		return "/shareCode/list";
