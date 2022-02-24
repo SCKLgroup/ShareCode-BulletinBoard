@@ -1,6 +1,6 @@
 package sharecode.controller;
 
-import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,22 +16,34 @@ public class CommentsController {
 	@Autowired
 	CommentsService service;
 
-	@RequestMapping(value="comments.do")
-	@ResponseBody
-	public HashMap<String, Object> commentsInsert(CommentsVO vo) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
+	//댓글 작성
+	@RequestMapping(value="commentsReg.do")
+	public String commentsInsert(CommentsVO vo) {
 		service.commentsInsert(vo);
-		map.put("commentsList", service.commentsList(vo.getPost_no()));
-		
-		return map;
+
+		return "redirect:/commentsList.do?post_no="+vo.getPost_no();
 	}
 	
 	// 댓글 리스트 출력 
 	@RequestMapping(value = "commentsList.do")
 	@ResponseBody
-	public HashMap<String, Object> commentsList(int post_no) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("commentsList", service.commentsList(post_no));
-		return map;
+	public List<CommentsVO> commentsList(int post_no) {
+		return service.commentsList(post_no);
+	}
+	
+	//댓글 삭제
+	@RequestMapping(value="commentsDelete.do")
+	public String commentsDelete(int com_no,int post_no) {
+		service.commentsDelete(com_no);
+		
+		return "redirect:/commentsList.do?post_no="+post_no;
+	}
+	
+	//댓글 수정
+	@RequestMapping(value="commentsModify.do")
+	public String commentsUpdate(CommentsVO vo) {
+		service.commentsUpdate(vo);
+		
+		return "redirect:/commentsList.do?post_no="+vo.getPost_no();
 	}
 }

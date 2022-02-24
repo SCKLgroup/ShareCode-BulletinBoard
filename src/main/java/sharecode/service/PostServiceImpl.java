@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import sharecode.dao.CommentsDao;
 import sharecode.dao.PostDao;
 import sharecode.vo.PostVO;
 
@@ -13,6 +14,8 @@ import sharecode.vo.PostVO;
 public class PostServiceImpl implements PostService {
 	@Autowired
 	PostDao dao;
+	@Autowired
+	CommentsDao comDao;
 
 	@Override
 	public void postInsertAction(PostVO vo) {
@@ -27,32 +30,35 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public void postDelete(int post_no) {
-		// TODO Auto-generated method stub
 		dao.deletePost(post_no);
+		comDao.deletePostComments(post_no);
 	}
 
 	@Override
 	public void postInfoUpdate(PostVO vo) {
-		// TODO Auto-generated method stub
 		dao.updatePostInfo(vo);
 	}
 
 
 	@Override
-	public List<PostVO> listAction(String category) {
-		System.out.println("포스트서비스임플리먼트 실행");
-		System.out.println(dao.selectLangCategory(category));
-		return dao.selectLangCategory(category);
+	public List<PostVO> listAction(HashMap<String, Object>map) {
+		return dao.selectLangCategory(map);
 	}
 	
 	@Override
-	public List<PostVO> ajaxlistAction(HashMap<String, Object> jobs){
-		return dao.ajaxSelectCategory(jobs);
+	public List<PostVO> alllistAction(HashMap<String, Object> map) {
+		
+		return dao.selectLangAllCategory(map);
+	}
+
+	@Override
+	public Integer listCount(String category) {
+		return dao.listCount(category);
+		
 	}
 	
-	@Override
-	public List<PostVO> ajaxalllistAction(HashMap<String, Object> jobs){
-		return dao.ajaxallSelectCategory(jobs);
-	}
+	
+
+	
 
 }

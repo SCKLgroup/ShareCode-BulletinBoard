@@ -51,18 +51,20 @@ public class PostDaoImpl implements PostDao {
 		return sqlSession.selectList("selectLanguage", category);
 	}
 
-	public List<PostVO> selectLangCategory(String category) {
-		System.out.println("포스트다오임플리먼트에서 실행");
-		System.out.println(sqlSession.selectList("selectLangCategory", category));
-		return sqlSession.selectList("selectLangCategory", category);
+	public List<PostVO> selectLangCategory(HashMap<String, Object>map) {
+		return sqlSession.selectList("selectLangCategory", map);
+	}
+	public List<PostVO> selectLangAllCategory(HashMap<String, Object> map) {
+		return sqlSession.selectList("selectLangAllCategory",map);
 	}
 	
-	public List<PostVO> ajaxSelectCategory(HashMap<String, Object> jobs){
-		return sqlSession.selectList("ajaxselectLangCategory",jobs);
+	public Integer listCount(String category) { 
+		System.out.println("다오에서 카테고리" + category);
+		return sqlSession.selectOne("countList", category);
 	}
 	
-	public List<PostVO> ajaxallSelectCategory(HashMap<String, Object> jobs){
-		return sqlSession.selectList("ajaxallselectLangCategory",jobs);
-	}
+
+	
+	
 
 }

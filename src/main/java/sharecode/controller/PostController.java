@@ -1,17 +1,16 @@
 package sharecode.controller;
 
-
 import java.util.HashMap;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sharecode.service.PostService;
+import sharecode.vo.PagingVO;
 import sharecode.vo.PostVO;
 
 @Controller
@@ -19,71 +18,76 @@ public class PostController {
 
 	@Autowired
 	PostService postService;
-	
+
 	@RequestMapping(value = "shareCode/post.do")
 	public String postInsertAction(PostVO vo) {
 		postService.postInsertAction(vo);
-		
-		return "/shareCode/list";
+
+		return "redirect:/shareCode/list.do";
 	}
-	
+
 	@RequestMapping(value = "shareCode/postInfo.do")
 	public String postInfoSelect(int post_no, Model model) {
-		model.addAttribute("postInfo",postService.postInfoSelect(post_no));
-		
+		model.addAttribute("postInfo", postService.postInfoSelect(post_no));
+
 		return "/shareCode/post-detail";
 	}
-	
-	
+
 	@RequestMapping(value = "shareCode/postModifyInfo.do")
 	public String postModifyInfoSelect(int post_no, Model model) {
-		model.addAttribute("postInfo",postService.postInfoSelect(post_no));
-		
+		model.addAttribute("postInfo", postService.postInfoSelect(post_no));
+
 		return "/shareCode/post-modify";
 	}
-	
+
 	@RequestMapping(value = "shareCode/postDelete.do")
 	public String postDelete(int post_no) {
 		postService.postDelete(post_no);
-	
-		return "redirect:/shareCode/list.jsp";
+
+		return "redirect:/shareCode/list.do";
 	}
-	
+
 	@RequestMapping(value = "shareCode/postModify.do")
-	public String postInfoUpdate(PostVO vo,RedirectAttributes redirect) {
+	public String postInfoUpdate(PostVO vo, RedirectAttributes redirect) {
 		postService.postInfoUpdate(vo);
-		redirect.addAttribute("post_no",vo.getPost_no());
-		
+		redirect.addAttribute("post_no", vo.getPost_no());
+
 		return "redirect:/shareCode/postInfo.do";
 	}
-	
-	/*
-	 * @RequestMapping(value = "shareCode/list.do") public String
-	 * mainlistAction(Model model,String category) {
-	 * 
-	 * model.addAttribute("selectLang", postService.listAction("C++"));
-	 * System.out.println(model.addAttribute("selectLang",
-	 * postService.listAction("Java"))); System.out.println("포스트컨트롤러의 메인리스트 실행");
-	 * 
-	 * return "/shareCode/list"; }
-	 */
-	
-	@RequestMapping(value="shareCode/list.do") // 관리자 페이지에서 상품 뿌리기  
-	@ResponseBody
-	public Map<String, Object> ajaxListAction(String job) {
-		System.out.println(job);
-		HashMap<String, Object> jobs=new HashMap<String, Object>();
-		jobs.put("job", job);
-		Map<String, Object> map=new HashMap<String, Object>();
-		if(!job.equals("default")) {
-			map.put("slang", postService.ajaxlistAction(jobs));
-			return map;
-		} else if (job.length() == 0){
-			map.put("slang", postService.ajaxalllistAction(jobs));
-			return map;
+
+	@RequestMapping(value = "shareCode/list.do")
+	public String mainlistAction(Model model, @RequestParam(value = "category", defaultValue = "all") String category,@RequestParam(value = "page", defaultValue = "1") int page) {
+		System.out.println(category);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		PagingVO vo = new PagingVO(page, postService.listCount(category));
+		map.put("page", page);
+		map.put("totalPage", vo.getTotalPage());
+		map.put("start", vo.getStartList());
+		map.put("end", vo.getEndList());
+		map.put("startPage", vo.getStartPage());
+		map.put("endPage", vo.getEndPage());
+		map.put("category", category);
+		
+		System.out.println(vo.getStartPage());
+		System.out.println(vo.getEndPage());
+		System.out.println(vo.getTotalPage());
+
+		if (category.equals("all")) {
+			model.addAttribute("selectLang", postService.alllistAction(map));
+			model.addAttribute("pageList", map);
 		} else {
-			map.put("slang", postService.ajaxalllistAction(jobs));
-			return map;
+			model.addAttribute("selectLang", postService.listAction(map));
+			model.addAttribute("pageList", map);
 		}
+
+
+		if (category.equals("C++")) {
+			category = "C%2B%2B";
+		}
+		model.addAttribute("category", category);
+
+		return "/shareCode/list";
 	}
+
 }
