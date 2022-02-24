@@ -53,6 +53,7 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public Integer listCount(String category) {
+		System.out.println("서비스임플 category : "+category);
 		return dao.listCount(category);
 		
 	}

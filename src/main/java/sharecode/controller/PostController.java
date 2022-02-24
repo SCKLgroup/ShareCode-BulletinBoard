@@ -23,7 +23,7 @@ public class PostController {
 	public String postInsertAction(PostVO vo) {
 		postService.postInsertAction(vo);
 
-		return "/shareCode/list";
+		return "redirect:/shareCode/list.do";
 	}
 
 	@RequestMapping(value = "shareCode/postInfo.do")
@@ -44,7 +44,7 @@ public class PostController {
 	public String postDelete(int post_no) {
 		postService.postDelete(post_no);
 
-		return "redirect:/shareCode/list.jsp";
+		return "redirect:/shareCode/list.do";
 	}
 
 	@RequestMapping(value = "shareCode/postModify.do")
@@ -59,7 +59,7 @@ public class PostController {
 	public String mainlistAction(Model model, @RequestParam(value = "category", defaultValue = "all") String category,
 			@RequestParam(value = "page", defaultValue = "1") int page) {
 
-		System.out.println(category);
+		System.out.println("첫카테고리 값 : " + category);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
 		PagingVO vo = new PagingVO(page, postService.listCount(category));
@@ -71,9 +71,9 @@ public class PostController {
 		map.put("endPage", vo.getEndPage());
 		map.put("category", category);
 
-		System.out.println(vo.getStartPage());
-		System.out.println(vo.getEndPage());
-		System.out.println(vo.getTotalPage());
+//		System.out.println(vo.getStartPage());
+//		System.out.println(vo.getEndPage());
+//		System.out.println(vo.getTotalPage());
 
 		if (category.equals("all")) {
 			model.addAttribute("selectLang", postService.alllistAction(map));
@@ -90,7 +90,7 @@ public class PostController {
 		}else if (category.equals("C#")) {
 			category = "C%23";
 		}
-		System.out.println("카테고리 무엇" + category);
+		System.out.println("바뀐 카테고리값 : " + category);
 		model.addAttribute("category", category);
 
 		return "/shareCode/list";

@@ -73,30 +73,30 @@
 				<ul>
 					<c:choose>
 						<c:when test="${pageList.startPage==1}">
-							<li><a href="list.do?category=${pageList.category}&page=${pageList.startPage}">처음으로</a></li>
+							<li><a href="list.do?category=${category}&page=${pageList.startPage}">처음으로</a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="list.do?category=${pageList.category}&page=${pageList.startPage-10}"></a></li>
+							<li><a href="list.do?category=${category}&page=${pageList.startPage-10}"></a></li>
 						</c:otherwise>
 					</c:choose>
 
 					<c:forEach varStatus="cnt" begin="${pageList.startPage}" end="${pageList.endPage}">
 						<c:choose>
 							<c:when test="${cnt.index eq pageList.page }">
-								<li><a href="#" class="current-page">${cnt.index}</a></li>
+								<li class="active"><a href="#">${cnt.index}</a></li>
 							</c:when>
 							<c:otherwise>
-								<li><a href="list.do?category=${pageList.category}&page=${cnt.index}">${cnt.index}</a></li>
+								<li><a href="list.do?category=${category}&page=${cnt.index}">${cnt.index}</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
 
 					<c:choose>
 						<c:when test="${pageList.endPage ne pageList.totalPage}">
-							<a href="list.do?category=${pageList.category}&page=${pageList.endPage+1}"></a>
+							<a href="list.do?category=${category}&page=${pageList.endPage+1}"></a>
 						</c:when>
 						<c:otherwise>
-							<a href="list.do?category=${pageList.category}&page=${pageList.endPage}"></a>
+							<a href="list.do?category=${category}&page=${pageList.endPage}"></a>
 						</c:otherwise>
 					</c:choose>
 				</ul>
@@ -105,7 +105,6 @@
 	</div>
 
 	<script type="text/javascript">
-	
 	
 	function categorySubmit(event){
 		window.location.href='/web/shareCode/list.do?category='+event+'&page=1';
