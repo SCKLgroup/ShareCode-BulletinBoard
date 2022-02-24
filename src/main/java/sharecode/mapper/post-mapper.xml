@@ -5,62 +5,83 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="post">
 
 	<insert id="insertPost" parameterType="sharecode.vo.PostVO">
-		<selectKey keyProperty="post_no" resultType="int" order="BEFORE">
+		<selectKey keyProperty="post_no" resultType="int"
+			order="BEFORE">
 			SELECT POST_SEQ.NEXTVAL FROM DUAL
 		</selectKey>
-		INSERT INTO POST 
-		(POST_NO, USER_NO, POST_TITLE, POST_CONTENT, POST_CATEGORY, POST_HIT, POST_DATE)
-		VALUES(#{post_no}, #{user_no}, #{post_title}, #{post_content}, #{post_category},0,SYSDATE)
+		INSERT INTO POST
+		(POST_NO, USER_NO, POST_TITLE, POST_CONTENT,
+		POST_CATEGORY, POST_HIT,
+		POST_DATE)
+		VALUES(#{post_no}, #{user_no},
+		#{post_title},
+		#{post_content}, #{post_category},0,SYSDATE)
 	</insert>
-	
-	<select id="selectPostInfo" parameterType="java.lang.Integer" resultType="sharecode.vo.PostVO">
-		SELECT POST_NO, P.USER_NO, USER_ID, POST_TITLE, POST_CONTENT, POST_CATEGORY, POST_HIT, POST_DATE
-		FROM POST P, USERINFO U
+
+	<select id="selectPostInfo" parameterType="java.lang.Integer"
+		resultType="sharecode.vo.PostVO">
+		SELECT POST_NO, P.USER_NO, USER_ID, POST_TITLE,
+		POST_CONTENT, POST_CATEGORY, POST_HIT, POST_DATE
+		FROM POST P, USERINFO
+		U
 		WHERE P.USER_NO=U.USER_NO
 		AND POST_NO=#{post_no}
 	</select>
-	
+
 	<update id="updatePostHit" parameterType="java.lang.Integer">
-		UPDATE POST SET POST_HIT=POST_HIT+1
+		UPDATE POST SET
+		POST_HIT=POST_HIT+1
 		WHERE POST_NO=#{post_no}
 	</update>
-	
+
 	<update id="updatePostInfo" parameterType="sharecode.vo.PostVO">
-		UPDATE POST SET POST_TITLE=#{post_title},POST_CONTENT=#{post_content},POST_CATEGORY=#{post_category}
+		UPDATE POST SET
+		POST_TITLE=#{post_title},POST_CONTENT=#{post_content},POST_CATEGORY=#{post_category}
 		WHERE POST_NO=#{post_no}
 	</update>
-	
-	<select id="selectLangCategory" parameterType="String" resultType="sharecode.vo.PostVO"> <!--카테고리찾기  -->
-		SELECT
-		POST_NO,USER_NO,POST_TITLE,POST_CONTENT,POST_CATEGORY,POST_HIT,POST_DATE
+
+	<select id="selectLangAllCategory" parameterType="HashMap"
+		resultType="sharecode.vo.PostVO"> <!--카테고리찾기 -->
+		SELECT * FROM
+		(SELECT
+		POST_NO,USER_NO,POST_TITLE,POST_CONTENT,POST_CATEGORY,POST_HIT,POST_DATE,
+		ROW_NUMBER() OVER(ORDER BY POST_NO DESC) AS RNUM
 		FROM POST
-		WHERE POST_CATEGORY= #{value}
+		)
+		WHERE RNUM
+		BETWEEN ${start} AND ${end}
 	</select>
-	
-	<select id="selectLangAllCategory" parameterType="String" resultType="sharecode.vo.PostVO"> <!--카테고리찾기  -->
-		SELECT
-		POST_NO,USER_NO,POST_TITLE,POST_CONTENT,POST_CATEGORY,POST_HIT,POST_DATE
+
+	<select id="countList" parameterType="String" resultType="int"> <!-- 카테고리별 리스트 수 -->
+		SELECT COUNT(*) FROM POST
+		<if test='!#{value}.equals("all")'>
+   		WHERE POST_CATEGORY =#{value}
+		</if>
+	</select>
+
+	<select id="selectLangCategory" parameterType="HashMap"
+		resultType="sharecode.vo.PostVO"> <!--카테고리찾기 -->
+		SELECT * FROM
+		(SELECT
+		POST_NO,USER_NO,POST_TITLE,POST_CONTENT,POST_CATEGORY,POST_HIT,POST_DATE,
+		ROW_NUMBER() OVER(ORDER BY POST_NO DESC) AS RNUM
 		FROM POST
+		WHERE
+		POST_CATEGORY=#{category})
+		WHERE RNUM BETWEEN ${start} AND ${end}
+
 	</select>
-	
-	
-	<select id="ajaxselectLangCategory" parameterType="HashMap" resultType="sharecode.vo.PostVO"> <!--카테고리찾기  -->
-		SELECT
-		POST_NO,USER_NO,POST_TITLE,POST_CONTENT,POST_CATEGORY,POST_HIT,POST_DATE
-		FROM POST
-		WHERE POST_CATEGORY= #{job}
+
+
+	<!-- 총 게시글 갯수 출력 -->
+	<select id="countPost" resultType="int">
+		SELECT COUNT(*) FROM POST
 	</select>
-	
-	<select id="ajaxallselectLangCategory" parameterType="HashMap" resultType="sharecode.vo.PostVO"> <!--카테고리찾기  -->
-		SELECT
-		POST_NO,USER_NO,POST_TITLE,POST_CONTENT,POST_CATEGORY,POST_HIT,POST_DATE
-		FROM POST
-	</select>
-	
+
 	<delete id="deletePost" parameterType="java.lang.Integer">
 		DELETE FROM POST
 		WHERE
 		POST_NO=#{post_no}
 	</delete>
- 
+
 </mapper>
