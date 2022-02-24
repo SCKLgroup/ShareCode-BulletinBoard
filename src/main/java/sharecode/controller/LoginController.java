@@ -26,12 +26,12 @@ public class LoginController {
 		if (login == null) {
 			session.setAttribute("member", null);
 			rttr.addFlashAttribute("msg", false);
-			return "shareCode/list";
+			return "redirect:list.do";
 		} else {
 			session.setAttribute("member", login);
 			session.setMaxInactiveInterval(30*60);
 //			return "redirect:post.do";
-			return "shareCode/list";
+			return "redirect:list.do";
 		}
 	}
 
@@ -41,7 +41,7 @@ public class LoginController {
 		req.getSession(true);
 		
 //		return "redirect:post.do";
-		return "shareCode/list";
+		return "redirect:list.do";
 	}
 
 }

@@ -23,10 +23,10 @@
 
 			<form method="post" action="post.do">
 				<c:if test="${user_no == null }">
-					<input type="text" value="${member.user_no}" name="user_no" />
+					<input type="hidden" value="${member.user_no}" name="user_no" />
 				</c:if>
 				<c:if test="${user_no != null }">
-					<input type="text" value="${user_no}" name="user_no" />
+					<input type="hidden" value="${user_no}" name="user_no" />
 				</c:if>
 				<div class="form-row">
 					<span class="title writing">카테고리</span> <select

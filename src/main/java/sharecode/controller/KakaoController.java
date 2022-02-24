@@ -35,9 +35,9 @@ public class KakaoController {
         HttpSession kakaoid = req.getSession();
         
         
-        kakaoid.setAttribute("kakaoid", userInfo.get("id"));
+        kakaoid.setAttribute("kakaoid", userInfo.get("email"));
         kakaonic.setAttribute("kakaonic", userInfo.get("nickname"));
-        kakaomail.setAttribute("kakaomail", userInfo.get("email"));
+        kakaomail.setAttribute("kakaomail", userInfo.get("id"));
         kakaoid.setMaxInactiveInterval(30*60);
         kakaonic.setMaxInactiveInterval(30*60);
         kakaomail.setMaxInactiveInterval(30*60);
@@ -56,7 +56,7 @@ public class KakaoController {
         System.out.println("###nickname#### : " + userInfo.get("nickname"));
 //        return "redirect:post.do";
         
-		return "shareCode/list";
+		return "redirect:list.do";
 
     }
     

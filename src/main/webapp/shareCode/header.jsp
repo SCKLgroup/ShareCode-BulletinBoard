@@ -77,7 +77,7 @@
 		<c:if test="${kakaoid != null}">
 			<div class="login_menu">
 				<p class="helle_user">
-					[ ${kakaomail} ] 님 환영합니다 :) <a
+					[ ${kakaoid} ] 님 환영합니다 :) <a
 						href="https://kauth.kakao.com/oauth/logout?
 						client_id=2790956db8b98f04db2d8d8df073fa48&
 						logout_redirect_uri=http://localhost:8080/web/shareCode/logout.do"><button

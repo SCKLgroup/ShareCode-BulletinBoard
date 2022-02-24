@@ -122,7 +122,7 @@
 	
 	
 	function postWrite(){
-		if(${member.user_no == null}){
+		if(${member.user_no == null &&user_no == null}){
 			alert('로그인 후 이용해주세요');
 			return
 		}
