@@ -72,13 +72,16 @@ body{
     width: 50px;
     margin-right:5px;
 }
-.comments-block{
+div.comments-block{
 	box-shadow: 0 2px 0 rgba(0,0,0,0.075);
     border-radius: 0;
     border: 0;
   	padding: 5px;
 }
-.panel-body {
+div.panel-body {
     padding: 25px 20px;
 }
 
+textarea{
+	font-size: 15px;
+}

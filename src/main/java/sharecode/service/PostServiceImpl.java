@@ -14,6 +14,7 @@ import sharecode.vo.PostVO;
 public class PostServiceImpl implements PostService {
 	@Autowired
 	PostDao dao;
+	@Autowired
 	CommentsDao comDao;
 
 	@Override
@@ -31,7 +32,6 @@ public class PostServiceImpl implements PostService {
 	public void postDelete(int post_no) {
 		dao.deletePost(post_no);
 		comDao.deletePostComments(post_no);
-		
 	}
 
 	@Override
