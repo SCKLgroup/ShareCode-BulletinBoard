@@ -12,6 +12,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="sharecode/mapper/login-mapper.xml"/>
 		<mapper resource="sharecode/mapper/comments-mapper.xml"/>
 		<mapper resource="sharecode/mapper/board-mapper.xml"/>
+		<mapper resource="sharecode/mapper/kakao-mapper.xml"/>
 	</mappers> 
 	
 	

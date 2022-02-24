@@ -44,7 +44,7 @@
 		var temp = "";
 		$.each(v.slang, function(index, dom) {
 
-			temp += "<tr onClick=\"location.href='postInfo.do?post_no="
+			temp += "<tr onClick=\"location.hre+f='postInfo.do?post_no="
 					+ dom.post_no + "'\">";
 			temp += "<td>" + dom.post_no + "</td>";
 			temp += "<td>" + dom.post_title + "</td>";

@@ -32,7 +32,7 @@
 
 		<div class="wrap">
 			<div class="search">
-				<form name="form1" method="post" action="list.jsp">
+				<form name="form1" method="post" action="board.do">
 					<select name="searchOption" id="post_category"
 						style="margin-right: 2%; width: 25%">
 						<option value="all"
@@ -43,8 +43,8 @@
 							<c:out value="${map.searchOption == 'Python' ? 'selected' : '' }" />>Python</option>
 						<option value="C++"
 							<c:out value="${map.searchOption == 'C++' ? 'selected' : '' }" />>C++</option>
-						<option value="other"
-							<c:out value="${map.searchOption == 'other' ? 'selected' : '' }" />>기타</option>
+						<option value="Other"
+							<c:out value="${map.searchOption == 'Other' ? 'selected' : '' }" />>기타</option>
 					</select> <input type="text" name="keyword" value="${map.keyword}"
 						class="searchTerm" placeholder="검색어를 입력해주세요" style="width: 55%">
 					<button type="submit" class="searchButton">
@@ -77,7 +77,7 @@
 		<c:if test="${kakaoid != null}">
 			<div class="login_menu">
 				<p class="helle_user">
-					[ ${kakaoid} ] 님 환영합니다 :) <a
+					[ ${kakaomail} ] 님 환영합니다 :) <a
 						href="https://kauth.kakao.com/oauth/logout?
 						client_id=2790956db8b98f04db2d8d8df073fa48&
 						logout_redirect_uri=http://localhost:8080/web/shareCode/logout.do"><button

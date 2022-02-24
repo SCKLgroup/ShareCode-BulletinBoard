@@ -19,9 +19,10 @@ public class BoardController {
 	
 	@Inject BoardService boardService;
 
-	@RequestMapping("board.do")
+	@RequestMapping("shareCode/board.do")
 	public ModelAndView board(@RequestParam(defaultValue = "post_title") String searchOption,
 			@RequestParam(defaultValue = "") String keyword) throws Exception {
+		System.out.println("보드컨트롤러 도착?");
 		List<PostVO> board = boardService.boardAll(searchOption, keyword);
 
 		int count = boardService.countArticle(searchOption,keyword);
@@ -29,12 +30,13 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView();
 		
 		Map<String,Object>map=new HashMap<String, Object>();
+		
 		map.put("board", board);
 		map.put("count", count);
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
 		mav.addObject("map", map);
-		mav.setViewName("searchCode/list");
+		mav.setViewName("shareCode/list-select");
 		return mav;
 		
 	}
