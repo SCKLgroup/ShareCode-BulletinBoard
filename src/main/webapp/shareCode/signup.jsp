@@ -127,7 +127,7 @@
 
 		});
 
-		/* 회원가입  */
+		/* 회원가입  */ //수정이 필요함
 		$("button#join").click(
 				function() {
 					if (confirm("정말 가입하시겠습니까?") == true) {
