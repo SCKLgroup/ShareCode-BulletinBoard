@@ -1,16 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
-<%@ taglib prefix="functions" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ taglib prefix="functions"
+	uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>ShareCode</title>
 <link rel="stylesheet" href="css/list.css" type="text/css">
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
@@ -30,6 +30,7 @@
 				</colgroup>
 				<thead>
 
+
 					<select name="category" class="languageSelect" onchange="categorySubmit(this.value)">
 						<option id="category" value="all">전체</option>
 						<option id="category" value="Java">Java</option>
@@ -48,6 +49,7 @@
 					</tr>
 				</thead>
 				<tbody id="tblist">
+
 					<c:forEach var="i" items="${selectLang}" varStatus="cnt">
 						<tr onclick="location.href='postInfo.do?post_no=${i.post_no}'">
 							<td>${i.post_no}</td>
@@ -118,7 +120,7 @@
 	
 	
 	function postWrite(){
-		if(${member.user_no == null}){
+		if(${member.user_no == null &&user_no == null}){
 			alert('로그인 후 이용해주세요');
 			return
 		}

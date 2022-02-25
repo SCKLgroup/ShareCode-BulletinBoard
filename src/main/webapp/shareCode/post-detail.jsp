@@ -72,7 +72,7 @@
 
 			<c:catch>
 				<c:choose>
-					<c:when test="${postInfo.user_no eq member.user_no}">
+					<c:when test="${postInfo.user_no eq member.user_no eq user_no}">
 						<button class="write-btn" type="button"
 							onclick="location.href='postModifyInfo.do?post_no=${postInfo.post_no}'">수정</button>
 						<button class="write-btn" type="button"

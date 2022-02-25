@@ -11,6 +11,7 @@
 <title>ShareCode</title>
 
 
+<link rel="stylesheet" href="css/writing.css" type="text/css">
 <link rel="stylesheet" href="css/header.css" type="text/css">
 <link rel="stylesheet" href="css/login.css" type="text/css">
 <link rel="stylesheet"
@@ -31,10 +32,25 @@
 
 		<div class="wrap">
 			<div class="search">
-				<input type="text" class="searchTerm" placeholder="검색어를 입력해주세요">
-				<button type="submit" class="searchButton">
-					<i class="fa fa-search"></i>
-				</button>
+				<form name="form1" method="post" action="board.do">
+					<select name="searchOption" id="post_category"
+						style="margin-right: 2%; width: 25%">
+						<option value="all"
+							<c:out value="${map.searchOption == 'all' ? 'selected' : '' }" />>전체</option>
+						<option value="Java"
+							<c:out value="${map.searchOption == 'Java' ? 'selected' : '' }" />>Java</option>
+						<option value="Python"
+							<c:out value="${map.searchOption == 'Python' ? 'selected' : '' }" />>Python</option>
+						<option value="C++"
+							<c:out value="${map.searchOption == 'C++' ? 'selected' : '' }" />>C++</option>
+						<option value="Other"
+							<c:out value="${map.searchOption == 'Other' ? 'selected' : '' }" />>기타</option>
+					</select> <input type="text" name="keyword" value="${map.keyword}"
+						class="searchTerm" placeholder="검색어를 입력해주세요" style="width: 55%">
+					<button type="submit" class="searchButton">
+						<i class="fa fa-search"></i>
+					</button>
+				</form>
 			</div>
 		</div>
 
@@ -64,7 +80,8 @@
 					[ ${kakaoid} ] 님 환영합니다 :) <a
 						href="https://kauth.kakao.com/oauth/logout?
 						client_id=2790956db8b98f04db2d8d8df073fa48&
-						logout_redirect_uri=http://localhost:8080/web/shareCode/logout.do"><button id="logoutBtn" type="button">logout</button></a>
+						logout_redirect_uri=http://localhost:8080/web/shareCode/logout.do"><button
+							id="logoutBtn" type="button">logout</button></a>
 				</p>
 
 			</div>
