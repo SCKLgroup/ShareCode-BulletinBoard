@@ -18,6 +18,8 @@
 	<jsp:include page="header.jsp" />
 	<div class="inner_cont">
 		<div class="borad_list_tbl">
+			<div class="select_result">[ ${map.count} ] 개의 게시글이 있습니다.</div>
+			<br>
 			<table>
 				<caption>게시판 리스트</caption>
 				<colgroup>
@@ -37,14 +39,12 @@
 						<th scope="col">조회수</th>
 					</tr>
 				</thead>
-				
+
 				<tbody id="tblist">
-				${map.count}개의 게시물이 있습니다.
-				${map.board}
 					<c:forEach var="low" items="${map.board}">
 						<tr>
 							<td>${low.post_no}</td>
-							<td><a href="postInfo.do?post_no"></a>${low.post_title }</td>
+							<td><a href="postInfo.do?post_no=${low.post_no}">${low.post_title }</a></td>
 							<td>${low.user_id}</td>
 							<td>${low.post_date}</td>
 							<td>${low.post_hit}</td>
@@ -60,15 +60,36 @@
 		</div>
 
 		<div class="container xlarge">
-			<div class="pagination">
+			<div class="pagination" id="pageList">
 				<ul>
-					<li><a href="#">PREVIOUS</a></li>
-					<li><a href="#">1</a></li>
-					<li class="active"><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-					<li><a href="#">NEXT</a></li>
+					<c:choose>
+						<c:when test="${pageList.startPage==1}">
+							<li><a href="list.do?category=${pageList.category}&page=${pageList.startPage}">처음으로</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="list.do?category=${pageList.category}&page=${pageList.startPage-10}"></a></li>
+						</c:otherwise>
+					</c:choose>
+
+					<c:forEach varStatus="cnt" begin="${pageList.startPage}" end="${pageList.endPage}">
+						<c:choose>
+							<c:when test="${cnt.index eq pageList.page }">
+								<li><a href="#" class="current-page">${cnt.index}</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="list.do?category=${pageList.category}&page=${cnt.index}">${cnt.index}</a></li>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+
+					<c:choose>
+						<c:when test="${pageList.endPage ne pageList.totalPage}">
+							<a href="list.do?category=${pageList.category}&page=${pageList.endPage+1}"></a>
+						</c:when>
+						<c:otherwise>
+							<a href="list.do?category=${pageList.category}&page=${pageList.endPage}"></a>
+						</c:otherwise>
+					</c:choose>
 				</ul>
 			</div>
 		</div>

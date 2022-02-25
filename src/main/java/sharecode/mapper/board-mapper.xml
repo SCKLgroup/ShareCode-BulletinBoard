@@ -6,42 +6,64 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="boardAll" resultType="sharecode.vo.PostVO">
 		SELECT post_no, u.user_no, u.user_id, post_title, post_content,
 		post_category, post_date, post_hit
-		FROM POST p, USERINFO
-		WHERE p.user_no = u.user_no and user_id=#{user_id}and
+		FROM POST p, USERINFO u
+		WHERE
+		p.user_no= u.user_no
 		<include refid="search"></include>
 		ORDER BY post_no DESC ,post_date DESC
 	</select>
 
 	<select id="countArticle" resultType="int">
-		SELECT COUNT(*) FROM POST WHERE p.user_no = u.user_no and
-		user_id=#{user_id}and
+		SELECT COUNT(*) FROM POST p, USERINFO u
+		WHERE p.user_no= u.user_no
 		<include refid="search"></include>
 	</select>
 
 	<sql id="search">
 		<choose>
 			<when test="searchOption == 'all'">
-				(post_content
-				like '%'||#{keyword}||'%' or post_title like '%'||#{keyword}||'%')
-
+				and (LOWER(REPLACE(post_title,' ','')) LIKE
+				LOWER(REPLACE('%'||#{keyword}||'%',' ','')) OR
+				LOWER(REPLACE(post_content,' ','')) LIKE
+				LOWER(REPLACE('%'||#{keyword}||'%',' ','')) OR
+				LOWER(REPLACE(user_id,' ','')) LIKE
+				LOWER(REPLACE('%'||#{keyword}||'%',' ','')))
 			</when>
 			<when test="searchOption == 'Java'">
-				(user_id like '%'||#{keyword}||'%' or post_content like '%'||#{keyword}||'%'
-				or post_title like '%'||#{keyword}||'%') and post_category = 'Java'
+				and (LOWER(REPLACE(post_title,' ','')) LIKE
+				LOWER(REPLACE('%'||#{keyword}||'%',' ','')) OR
+				LOWER(REPLACE(post_content,' ','')) LIKE
+				LOWER(REPLACE('%'||#{keyword}||'%',' ','')) OR
+				LOWER(REPLACE(user_id,' ','')) LIKE
+				LOWER(REPLACE('%'||#{keyword}||'%',' ',''))) AND post_category =
+				'Java'
 			</when>
 			<when test="searchOption == 'Python'">
-				(user_id like '%'||#{keyword}||'%' or post_content
-				like '%'||#{keyword}||'%' or post_title like '%'||#{keyword}||'%')
-				and post_category = 'Python'
+				and (LOWER(REPLACE(post_title,' ','')) LIKE
+				LOWER(REPLACE('%'||#{keyword}||'%',' ','')) OR
+				LOWER(REPLACE(post_content,' ','')) LIKE
+				LOWER(REPLACE('%'||#{keyword}||'%',' ','')) OR
+				LOWER(REPLACE(user_id,' ','')) LIKE
+				LOWER(REPLACE('%'||#{keyword}||'%',' ',''))) AND post_category =
+				'Python'
 			</when>
 			<when test="searchOption == 'C++'">
-				(user_id like '%'||#{keyword}||'%' or post_content
-				like '%'||#{keyword}||'%' or post_title like '%'||#{keyword}||'%')
-				and post_category = 'C++'
+				and (LOWER(REPLACE(post_title,' ','')) LIKE
+				LOWER(REPLACE('%'||#{keyword}||'%',' ','')) OR
+				LOWER(REPLACE(post_content,' ','')) LIKE
+				LOWER(REPLACE('%'||#{keyword}||'%',' ','')) OR
+				LOWER(REPLACE(user_id,' ','')) LIKE
+				LOWER(REPLACE('%'||#{keyword}||'%',' ',''))) AND post_category =
+				'C++'
 			</when>
 			<when test="searchOption == 'Other'">
-				(user_id like '%'||#{keyword}||'%' or post_content like '%'||#{keyword}||'%'
-				or post_title like '%'||#{keyword}||'%') and post_category = 'Other'
+				and (LOWER(REPLACE(post_title,' ','')) LIKE
+				LOWER(REPLACE('%'||#{keyword}||'%',' ','')) OR
+				LOWER(REPLACE(post_content,' ','')) LIKE
+				LOWER(REPLACE('%'||#{keyword}||'%',' ','')) OR
+				LOWER(REPLACE(user_id,' ','')) LIKE
+				LOWER(REPLACE('%'||#{keyword}||'%',' ',''))) AND post_category =
+				'Other'
 			</when>
 
 			<!-- <otherwise> where ${searchOption} like '%'||#{keyword}||'%' </otherwise> -->
