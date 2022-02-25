@@ -1,8 +1,6 @@
-
 a {
 	text-decoration: none;
 }
-
 
 table caption {
 	height: 0;
@@ -49,7 +47,6 @@ table caption {
 	text-align: center;
 	word-break: break-all;
 }
-
 
 .borad_list_tbl tbody td.td_left {
 	text-align: left;
@@ -149,78 +146,84 @@ table caption {
 	background: #58585a;
 	color: #fff;
 	border-radius: 5px;
-	width:auto;
+	width: auto;
 	padding: 0 5px;
 }
 
-
 /* pagination */
 .center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .container {
-  background: #fff;
-  padding: 1rem;
-  border-radius: 0.2rem;
-  counter-reset: pagination;
-  text-align: center;
+	background: #fff;
+	padding: 1rem;
+	border-radius: 0.2rem;
+	counter-reset: pagination;
+	text-align: center;
 }
-  .container:after {
-    clear: both;
-    content: "";
-    display: table;
-  }
- .container ul {
-    width: 100%;
-  }
-  
+
+.container:after {
+	clear: both;
+	content: "";
+	display: table;
+}
+
+.container ul {
+	width: 100%;
+}
+
 .container ul li {
-  list-style: none;
-  display: inline;
-  padding-left: 0px;
+	list-style: none;
+	display: inline;
+	padding-left: 0px;
 }
 
-.container ul li a{
-    border: solid 2px #6667AB;
-    border-radius: 0.2rem;
-    text-decoration: none;
-    text-transform: uppercase;
-    display: inline-block;
-    text-align: center;
-    padding: 0.5rem 0.9rem;
+.container ul li a {
+	border: solid 2px #6667AB;
+	border-radius: 0.2rem;
+	text-decoration: none;
+	text-transform: uppercase;
+	display: inline-block;
+	text-align: center;
+	padding: 0.5rem 0.9rem;
 }
 
-.container li a:hover{
-      background-color: #6667AB;
-      border: solid 1px #6667AB;
-      color: #ffffff;
+.container li a:hover {
+	background-color: #6667AB;
+	border: solid 1px #6667AB;
+	color: #ffffff;
 }
 
-.container .active a{
-      background-color: #6667AB;
-      border: solid 1px #6667AB;
-      color: #ffffff;
+.container .active a {
+	background-color: #6667AB;
+	border: solid 1px #6667AB;
+	color: #ffffff;
 }
 
 /* button */
-
-.btn-div{
-	padding-right:20px;
+.btn-div {
+	padding-right: 20px;
 	padding-top: 20px;
 	text-align: right;
 	background: #ffffff;
 }
 
-.write-btn{
-    background-color: #6667AB;
-    color: #ffffff;
-    font-weight: bold;
-    padding: 10px 22px;
-    border-radius: 0.2rem;
-    border: 0;
-	width:100px;
+.write-btn {
+	background-color: #6667AB;
+	color: #ffffff;
+	font-weight: bold;
+	padding: 10px 22px;
+	border-radius: 0.2rem;
+	border: 0;
+	width: 100px;
 }
 
+.select_result {
+	padding-bottom: 5%;
+	text-align: center;
+	font-size: 40px;
+	font-weight: bold;
+}
