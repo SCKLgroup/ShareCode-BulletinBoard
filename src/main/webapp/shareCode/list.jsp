@@ -1,8 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
-<%@ taglib prefix="functions"
-	uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="functions" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +27,6 @@
 					<col width="30">
 				</colgroup>
 				<thead>
-
 
 					<select name="category" class="languageSelect" onchange="categorySubmit(this.value)">
 						<option id="category" value="all">전체</option>
@@ -80,7 +77,7 @@
 							<li><a href="list.do?category=${category}&page=${pageList.startPage}">처음으로</a></li>
 						</c:when>
 						<c:otherwise>
-						
+
 							<li><a href="list.do?category=${category}&page=${pageList.startPage-1}">이전 페이지</a></li>
 						</c:otherwise>
 					</c:choose>
@@ -125,8 +122,7 @@
 			return
 		}
 		window.location.href = 'post-write.jsp';
-	} 
-	
+	}
 	
 	
 
