@@ -58,7 +58,7 @@
 		<c:if test="${member == null &&kakaoid == null}">
 			<div>
 				<ul class="menu">
-					<li><a href="#work">SignUp</a></li>
+					<li><a href="/web/shareCode/signup.jsp">SignUp</a></li>
 					<li><a href="#about" id="popup_open_btn">Login</a></li>
 				</ul>
 			</div>

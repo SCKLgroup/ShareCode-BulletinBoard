@@ -28,7 +28,7 @@ public class UserController {
 	public String userSignUpAction(UserVO vo) {
 		System.out.println("컨트롤러 실행");
 		dao.signupUser(vo);
-		return "sharecode/signup_success";
+		return "redirect:/shareCode/list.do";
 	}
 
 	/* 이메일 인증 */
@@ -77,7 +77,9 @@ public class UserController {
 	@ResponseBody
 	public String userIdCheckAction(String user_id) {
 		System.out.println("아이디체크 실행");
+		System.out.println("아이디? : " +user_id);
 		int dbid = dao.idCheck(user_id);
+		System.out.println("ㅇㅇㅇㅇ : "+dbid);
 		if (dbid != 0) {
 			return "1";
 		}
