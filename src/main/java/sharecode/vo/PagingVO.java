@@ -23,7 +23,7 @@ public class PagingVO {
 	
 	public PagingVO(int page, int totalList) {
 		this.page=page;
-		this.listSize = 10; //한 페이지에 출력되는 게시글이 총 16개
+		this.listSize = 10; //한 페이지에 출력 게시글 10개
 		this.blockSize = 10; //페이지 블럭 크기가 10 (ex 1 2 3 4 5 6 7 8 9 10) 
 		this.totalList=totalList;
 		this.totalPage=totalList/listSize+(totalList%listSize==0?0:1);

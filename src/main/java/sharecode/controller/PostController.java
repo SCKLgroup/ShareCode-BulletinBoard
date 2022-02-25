@@ -71,21 +71,17 @@ public class PostController {
 		map.put("endPage", vo.getEndPage());
 		map.put("category", category);
 
-//		System.out.println(vo.getStartPage());
-//		System.out.println(vo.getEndPage());
-//		System.out.println(vo.getTotalPage());
-
-		if (category.equals("all")) {
+		if (category.equals("all")) { //카테고리가 all 일때 전체 리스트 출력
 			model.addAttribute("selectLang", postService.alllistAction(map));
 			model.addAttribute("pageList", map);
-		} else {
+		} else { // 카테고리 항목이 정해져 있을 때는 해당 카테고리를 선택해 옴
 			model.addAttribute("selectLang", postService.listAction(map));
 			model.addAttribute("pageList", map);
 			
 			
 		}
 		
-		if (category.equals("C++")) {
+		if (category.equals("C++")) { //jsp -> 자바 변환과정중 특수기호를 인식 못하는 문제 때문에 작성
 			category = "C%2B%2B";
 		}else if (category.equals("C#")) {
 			category = "C%23";

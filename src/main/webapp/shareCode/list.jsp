@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="functions" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,7 +78,8 @@
 							<li><a href="list.do?category=${category}&page=${pageList.startPage}">처음으로</a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="list.do?category=${category}&page=${pageList.startPage-10}"></a></li>
+						
+							<li><a href="list.do?category=${category}&page=${pageList.startPage-1}">이전 페이지</a></li>
 						</c:otherwise>
 					</c:choose>
 
@@ -93,10 +96,10 @@
 
 					<c:choose>
 						<c:when test="${pageList.endPage ne pageList.totalPage}">
-							<a href="list.do?category=${category}&page=${pageList.endPage+1}"></a>
+							<li><a href="list.do?category=${category}&page=${pageList.endPage+1}">다음페이지</a></li>
 						</c:when>
 						<c:otherwise>
-							<a href="list.do?category=${category}&page=${pageList.endPage}"></a>
+							<li><a href="list.do?category=${category}&page=${pageList.endPage}">마지막으로</a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>
