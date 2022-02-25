@@ -28,11 +28,11 @@
 					<div>
 						<span class="title writing">비밀번호</span>
 						<input type="password" name="user_pw" id="password" class="swrite"
-							placeholder="4~20자의 영문 소문자와 숫자 조합">
+							placeholder="4~20자의 영문 소문자와 숫자 조합.">
 					</div>
 					<div>
 						<span class="title writing">비밀번호 확인</span>
-						<input type="password" id="pwCheck" class="swrite">
+						<input type="password" id="pwCheck" class="swrite" placeholder="비밀번호 확인란 입니다.">
 					</div>
 
 					<div class="validCheck" id="validPwCheck"></div>
