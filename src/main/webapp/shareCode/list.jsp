@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
-<%@ taglib prefix="functions" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="functions"
+	uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +10,8 @@
 <title>ShareCode</title>
 <link rel="stylesheet" href="css/list.css" type="text/css">
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
@@ -28,7 +31,8 @@
 				</colgroup>
 				<thead>
 
-					<select name="category" class="languageSelect" onchange="categorySubmit(this.value)">
+					<select name="category" class="languageSelect"
+						onchange="categorySubmit(this.value)">
 						<option id="category" value="all">전체</option>
 						<option id="category" value="Java">Java</option>
 						<option id="category" value="C%2B%2B">C++</option>
@@ -74,31 +78,38 @@
 				<ul>
 					<c:choose>
 						<c:when test="${pageList.startPage==1}">
-							<li><a href="list.do?category=${category}&page=${pageList.startPage}">처음으로</a></li>
+							<li><a
+								href="list.do?category=${category}&page=${pageList.startPage}">처음으로</a></li>
 						</c:when>
 						<c:otherwise>
 
-							<li><a href="list.do?category=${category}&page=${pageList.startPage-1}">이전 페이지</a></li>
+							<li><a
+								href="list.do?category=${category}&page=${pageList.startPage-1}">이전
+									페이지</a></li>
 						</c:otherwise>
 					</c:choose>
 
-					<c:forEach varStatus="cnt" begin="${pageList.startPage}" end="${pageList.endPage}">
+					<c:forEach varStatus="cnt" begin="${pageList.startPage}"
+						end="${pageList.endPage}">
 						<c:choose>
 							<c:when test="${cnt.index eq pageList.page }">
 								<li class="active"><a href="#">${cnt.index}</a></li>
 							</c:when>
 							<c:otherwise>
-								<li><a href="list.do?category=${category}&page=${cnt.index}">${cnt.index}</a></li>
+								<li><a
+									href="list.do?category=${category}&page=${cnt.index}">${cnt.index}</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
 
 					<c:choose>
 						<c:when test="${pageList.endPage ne pageList.totalPage}">
-							<li><a href="list.do?category=${category}&page=${pageList.endPage+1}">다음페이지</a></li>
+							<li><a
+								href="list.do?category=${category}&page=${pageList.endPage+1}">다음페이지</a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="list.do?category=${category}&page=${pageList.endPage}">마지막으로</a></li>
+							<li><a
+								href="list.do?category=${category}&page=${pageList.endPage}">마지막으로</a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>
