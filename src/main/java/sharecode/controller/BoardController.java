@@ -6,15 +6,12 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import sharecode.service.BoardService;
-import sharecode.service.PostService;
 import sharecode.vo.PagingVO;
 import sharecode.vo.PostVO;
 
@@ -26,19 +23,18 @@ public class BoardController {
 
 
 	@RequestMapping("shareCode/board.do")
-	public ModelAndView board(@RequestParam(defaultValue = "post_title") String searchOption,
-			@RequestParam(defaultValue = "") String keyword,@RequestParam(value = "category", defaultValue = "all") String category,
+	public ModelAndView board(@RequestParam(defaultValue = "all") String searchOption,
+			@RequestParam(defaultValue = "") String keyword,
 			@RequestParam(value = "page", defaultValue = "1") int page) throws Exception {
 		System.out.println("보드컨트롤러 도착?");
-		List<PostVO> board = boardService.boardAll(searchOption, keyword);
 
-		int count = boardService.countArticle(searchOption, keyword);
+		Map<String, Object> map = new HashMap<String, Object>();
+		int count = boardService.countArticle(map);
 
 		ModelAndView mav = new ModelAndView();
 
 		PagingVO vo = new PagingVO(page, count);
 		
-		Map<String, Object> map = new HashMap<String, Object>();
 
 		map.put("page", page);
 		map.put("totalPage", vo.getTotalPage());
@@ -46,18 +42,18 @@ public class BoardController {
 		map.put("end", vo.getEndList());
 		map.put("startPage", vo.getStartPage());
 		map.put("endPage", vo.getEndPage());
-		map.put("category", searchOption);
+		System.out.println(vo);
+		System.out.println(searchOption+"   /////////////////////////////////");
 		
-		map.put("board", board);
 		map.put("count", count);
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
 		mav.addObject("map", map);
-		
-		if (category.equals("all")) { //카테고리가 all 일때 전체 리스트 출력
-			mav.addObject("selectLang", boardService.boardAll(searchOption, keyword));
-			mav.addObject("pageList", map);
-		} 
+		List<PostVO> board = boardService.boardAll(map);
+		map.put("board", board);
+//		mav.addObject(vo);
+
+		System.out.println(map+"   //////************//////////////////////////");
 //		mav.setViewName("redirect:list-select.do");
 		if (count != 0) {
 			mav.setViewName("shareCode/list-select");

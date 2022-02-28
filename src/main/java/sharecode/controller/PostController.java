@@ -63,6 +63,7 @@ public class PostController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
 		PagingVO vo = new PagingVO(page, postService.listCount(category));
+		System.out.println(postService.listCount(category)+"카운트");
 		map.put("page", page);
 		map.put("totalPage", vo.getTotalPage());
 		map.put("start", vo.getStartList());
