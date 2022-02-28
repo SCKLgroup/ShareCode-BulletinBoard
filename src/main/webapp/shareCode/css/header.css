@@ -152,7 +152,7 @@ body {
 	border: 3px solid #6667AB;
 	border-right: none;
 	padding: 5px;
-	height: 20px;
+	height: 27px;
 	border-radius: 5px 0 0 5px;
 	outline: none;
 	color: #9DBFAF;
@@ -164,7 +164,7 @@ body {
 
 .searchButton {
 	width: 40px;
-	height: 36px;
+	height: 43px;
 	border: 1px solid #6667AB;
 	background: #6667AB;
 	text-align: center;
@@ -172,6 +172,7 @@ body {
 	border-radius: 0 5px 5px 0;
 	cursor: pointer;
 	font-size: 20px;
+	position: absolute;
 }
 
 /*Resize the wrap to see the search bar change!*/

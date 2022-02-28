@@ -16,60 +16,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		BETWEEN ${start} AND ${end}
 	</select>
 
-	<select id="countArticle" resultType="int">
+	<select id="countArticle" resultType="int" parameterType="HashMap">
 		SELECT COUNT(*) FROM POST p, USERINFO u
 		WHERE p.user_no= u.user_no
 		<include refid="search"></include>
 	</select>
 
 	<sql id="search">
-		<choose>
-			<when test="searchOption == 'all'">
-				and LOWER(REPLACE(post_title,' ','')) LIKE
-				LOWER(REPLACE('%'||#{keyword}||'%',' ','')) OR
-				LOWER(REPLACE(post_content,' ','')) LIKE
-				LOWER(REPLACE('%'||#{keyword}||'%',' ','')) OR
-				LOWER(REPLACE(user_id,' ','')) LIKE
-				LOWER(REPLACE('%'||#{keyword}||'%',' ',''))
-			</when>
-			<when test="searchOption == 'Java'">
-				and LOWER(REPLACE(post_title,' ','')) LIKE
-				LOWER(REPLACE('%'||#{keyword}||'%',' ','')) OR
-				LOWER(REPLACE(post_content,' ','')) LIKE
-				LOWER(REPLACE('%'||#{keyword}||'%',' ','')) OR
-				LOWER(REPLACE(user_id,' ','')) LIKE
-				LOWER(REPLACE('%'||#{keyword}||'%',' ','')) AND post_category =
-				'Java'
-			</when>
-			<when test="searchOption == 'Python'">
-				and LOWER(REPLACE(post_title,' ','')) LIKE
-				LOWER(REPLACE('%'||#{keyword}||'%',' ','')) OR
-				LOWER(REPLACE(post_content,' ','')) LIKE
-				LOWER(REPLACE('%'||#{keyword}||'%',' ','')) OR
-				LOWER(REPLACE(user_id,' ','')) LIKE
-				LOWER(REPLACE('%'||#{keyword}||'%',' ','')) AND post_category =
-				'Python'
-			</when>
-			<when test="searchOption == 'C++'">
-				and LOWER(REPLACE(post_title,' ','')) LIKE
-				LOWER(REPLACE('%'||#{keyword}||'%',' ','')) OR
-				LOWER(REPLACE(post_content,' ','')) LIKE
-				LOWER(REPLACE('%'||#{keyword}||'%',' ','')) OR
-				LOWER(REPLACE(user_id,' ','')) LIKE
-				LOWER(REPLACE('%'||#{keyword}||'%',' ','')) AND post_category =
-				'C++'
-			</when>
-			<when test="searchOption == 'Other'">
-				and LOWER(REPLACE(post_title,' ','')) LIKE
-				LOWER(REPLACE('%'||#{keyword}||'%',' ','')) OR
-				LOWER(REPLACE(post_content,' ','')) LIKE
-				LOWER(REPLACE('%'||#{keyword}||'%',' ','')) OR
-				LOWER(REPLACE(user_id,' ','')) LIKE
-				LOWER(REPLACE('%'||#{keyword}||'%',' ','')) AND post_category =
-				'Other'
-			</when>
+		<if  test='!searchOption.equals("all")'>
+			AND post_category = #{searchOption}
+		</if>
+		and LOWER(REPLACE(post_title,' ','')) LIKE
+		LOWER(REPLACE('%'||#{keyword}||'%',' ','')) OR
+		LOWER(REPLACE(post_content,' ','')) LIKE
+		LOWER(REPLACE('%'||#{keyword}||'%',' ','')) OR
+		LOWER(REPLACE(user_id,' ','')) LIKE
+		LOWER(REPLACE('%'||#{keyword}||'%',' ',''))
 
-			<!-- <otherwise> where ${searchOption} like '%'||#{keyword}||'%' </otherwise> -->
-		</choose>
 	</sql>
 </mapper>

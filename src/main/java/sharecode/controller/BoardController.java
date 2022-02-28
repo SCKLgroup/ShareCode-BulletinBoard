@@ -29,6 +29,9 @@ public class BoardController {
 		System.out.println("보드컨트롤러 도착?");
 
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		
 		int count = boardService.countArticle(map);
 
 		ModelAndView mav = new ModelAndView();
@@ -46,8 +49,6 @@ public class BoardController {
 		System.out.println(searchOption+"   /////////////////////////////////");
 		
 		map.put("count", count);
-		map.put("searchOption", searchOption);
-		map.put("keyword", keyword);
 		mav.addObject("map", map);
 		List<PostVO> board = boardService.boardAll(map);
 		map.put("board", board);

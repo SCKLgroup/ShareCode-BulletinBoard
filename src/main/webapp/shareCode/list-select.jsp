@@ -69,12 +69,12 @@
 					<c:choose>
 						<c:when test="${map.startPage==1}">
 							<li><a
-								href="board.do?${searchOption}&page=${map.startPage}">처음으로</a></li>
+								href="board.do?searchOption=${map.searchOption}&keyword=${map.keyword}&page=${map.startPage}">처음으로</a></li>
 						</c:when>
 						<c:otherwise>
 
 							<li><a
-								href="board.do?${searchOption}&page=${map.startPage-1}">이전
+								href="board.do?searchOption=${map.searchOption}&keyword=${map.keyword}&page=${map.startPage-1}">이전
 									페이지</a></li>
 						</c:otherwise>
 					</c:choose>
@@ -87,7 +87,7 @@
 							</c:when>
 							<c:otherwise>
 								<li><a
-									href="board.do?${searchOption}&page=${cnt.index}">${cnt.index}</a></li>
+									href="board.do?searchOption=${map.searchOption}&keyword=${map.keyword}&page=${cnt.index}">${cnt.index}</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
@@ -95,11 +95,11 @@
 					<c:choose>
 						<c:when test="${map.endPage ne map.totalPage}">
 							<li><a
-								href="board.do?${searchOption}&page=${map.endPage+1}">다음페이지</a></li>
+								href="board.do?searchOption=${map.searchOption}&keyword=${map.keyword}&page=${map.endPage+1}">다음페이지</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><a
-								href="board.do?${searchOption}&page=${map.endPage}">마지막으로</a></li>
+								href="board.do?searchOption=${map.searchOption}&keyword=${map.keyword}&page=${map.endPage}">마지막으로</a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>
