@@ -28,6 +28,7 @@ public class PostController {
 
 	@RequestMapping(value = "shareCode/postInfo.do")
 	public String postInfoSelect(int post_no, Model model) {
+		postService.postHitUpdate(post_no);
 		model.addAttribute("postInfo", postService.postInfoSelect(post_no));
 
 		return "/shareCode/post-detail";

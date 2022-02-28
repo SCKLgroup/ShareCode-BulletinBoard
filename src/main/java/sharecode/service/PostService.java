@@ -10,6 +10,7 @@ import sharecode.vo.PostVO;
 public interface PostService {
 	public void postInsertAction(PostVO vo);
 	public PostVO postInfoSelect(int post_no);
+	public void postHitUpdate(int post_no);
 	public void postInfoUpdate(PostVO vo);
 	public List<PostVO> listAction(HashMap<String, Object> map);
 	public List<PostVO> alllistAction(HashMap<String, Object> map);

@@ -24,8 +24,12 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public PostVO postInfoSelect(int post_no) {
-		dao.updatePostHit(post_no);
 		return dao.selectPostInfo(post_no);
+	}
+
+	@Override
+	public void postHitUpdate(int post_no) {
+		dao.updatePostHit(post_no);
 	}
 
 	@Override
