@@ -41,8 +41,8 @@
 							<c:out value="${map.searchOption == 'Java' ? 'selected' : '' }" />>Java</option>
 						<option value="Python"
 							<c:out value="${map.searchOption == 'Python' ? 'selected' : '' }" />>Python</option>
-						<option value="C++"
-							<c:out value="${map.searchOption == 'C++' ? 'selected' : '' }" />>C++</option>
+						<option value="C%2B%2B"
+							<c:out value="${map.searchOption == 'C%2B%2B' ? 'selected' : '' }" />>C++</option>
 						<option value="Other"
 							<c:out value="${map.searchOption == 'Other' ? 'selected' : '' }" />>기타</option>
 					</select> <input type="text" name="keyword" value="${map.keyword}"

@@ -26,9 +26,15 @@ public class BoardController {
 	public ModelAndView board(@RequestParam(defaultValue = "all") String searchOption,
 			@RequestParam(defaultValue = "") String keyword,
 			@RequestParam(value = "page", defaultValue = "1") int page) throws Exception {
-		System.out.println("보드컨트롤러 도착?");
 
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if (searchOption.equals("C%2B%2B")) { //jsp -> 자바 변환과정중 특수기호를 인식 못하는 문제 때문에 작성
+			searchOption = "C++";
+		}else if (searchOption.equals("C#")) {
+			searchOption = "C%23";
+		}
+		
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
 		
@@ -45,17 +51,10 @@ public class BoardController {
 		map.put("end", vo.getEndList());
 		map.put("startPage", vo.getStartPage());
 		map.put("endPage", vo.getEndPage());
-		System.out.println(vo);
-		System.out.println(searchOption+"   /////////////////////////////////");
-		
-		map.put("count", count);
-		mav.addObject("map", map);
+		map.put("searchOption", searchOption);
 		List<PostVO> board = boardService.boardAll(map);
-		map.put("board", board);
 //		mav.addObject(vo);
 
-		System.out.println(map+"   //////************//////////////////////////");
-//		mav.setViewName("redirect:list-select.do");
 		if (count != 0) {
 			mav.setViewName("shareCode/list-select");
 		} else {
@@ -63,6 +62,18 @@ public class BoardController {
 			mav.addObject("url","list.do");
 			mav.setViewName("shareCode/select-alert");
 		}
+	
+		if (searchOption.equals("C++")) { //jsp -> 자바 변환과정중 특수기호를 인식 못하는 문제 때문에 작성
+			searchOption = "C%2B%2B";
+		}else if (searchOption.equals("C#")) {
+			searchOption = "C%23";
+		}
+		map.put("searchOption", searchOption);
+		
+		map.put("count", count);
+		mav.addObject("map", map);
+		map.put("board", board);
+		System.out.println(board);
 		return mav;
 
 	}
