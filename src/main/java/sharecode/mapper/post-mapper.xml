@@ -43,10 +43,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectLangAllCategory" parameterType="HashMap"
 		resultType="sharecode.vo.PostVO"> <!--카테고리찾기 -->
 		SELECT * FROM
-		(SELECT
-		POST_NO,USER_NO,POST_TITLE,POST_CONTENT,POST_CATEGORY,POST_HIT,POST_DATE,
-		ROW_NUMBER() OVER(ORDER BY POST_NO DESC) AS RNUM
-		FROM POST
+		(SELECT p.POST_NO,p.USER_NO,p.POST_TITLE,p.POST_CONTENT,p.POST_CATEGORY,p.POST_HIT,p.POST_DATE,i.USER_ID,
+        ROW_NUMBER() OVER(ORDER BY p.POST_NO DESC) AS RNUM
+		FROM POST p , USERINFO i
+		WHERE p.USER_NO = i.USER_NO
 		)
 		WHERE RNUM
 		BETWEEN ${start} AND ${end}
@@ -62,13 +62,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectLangCategory" parameterType="HashMap"
 		resultType="sharecode.vo.PostVO"> <!--카테고리찾기 -->
 		SELECT * FROM
-		(SELECT
-		POST_NO,USER_NO,POST_TITLE,POST_CONTENT,POST_CATEGORY,POST_HIT,POST_DATE,
-		ROW_NUMBER() OVER(ORDER BY POST_NO DESC) AS RNUM
-		FROM POST
+		(SELECT p.POST_NO,p.USER_NO,p.POST_TITLE,p.POST_CONTENT,p.POST_CATEGORY,p.POST_HIT,p.POST_DATE,i.USER_ID,
+        ROW_NUMBER() OVER(ORDER BY p.POST_NO DESC) AS RNUM
+		FROM POST p , USERINFO i
 		<if test='!#{value}.equals("all")'>
-			WHERE
-			POST_CATEGORY=#{category})
+			WHERE p.USER_NO = i.USER_NO and
+			p.POST_CATEGORY=#{category})
 		</if>
 		WHERE RNUM BETWEEN ${start} AND ${end}
 

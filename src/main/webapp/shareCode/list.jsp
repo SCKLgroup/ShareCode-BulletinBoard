@@ -56,7 +56,7 @@
 							<td>${i.post_no}</td>
 							<td>${i.post_category}</td>
 							<td>${i.post_title}</td>
-							<td>${i.user_no}</td>
+							<td>${i.user_id}</td>
 							<td>${i.post_date}</td>
 							<td>${i.post_hit}</td>
 						</tr>
