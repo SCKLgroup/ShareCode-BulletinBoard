@@ -1,6 +1,7 @@
 package sharecode.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -16,13 +17,13 @@ public class BoardServiceImpl implements BoardService {
 	BoardDAO boardDAO;
 
 	@Override
-	public List<PostVO> boardAll(String searchOption, String keyword) throws Exception {
-		return boardDAO.boardAll(searchOption, keyword);
+	public List<PostVO> boardAll(Map<String, Object> map) throws Exception {
+		return boardDAO.boardAll(map);
 	}
 
 	@Override
-	public int countArticle(String searchOption, String keyword) throws Exception {
-		return boardDAO.countArticle(searchOption, keyword);
+	public int countArticle(Map<String, Object> map) {
+		return boardDAO.countArticle(map);
 	}
 
 }

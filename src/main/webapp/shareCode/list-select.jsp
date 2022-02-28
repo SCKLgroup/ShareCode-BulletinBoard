@@ -31,14 +31,7 @@
 					<col width="30">
 				</colgroup>
 				<thead>
-				<select name="category" class="languageSelect"
-						onchange="categorySubmit(this.value)">
-						<option id="category" value="all">전체</option>
-						<option id="category" value="Java">Java</option>
-						<option id="category" value="C%2B%2B">C++</option>
-						<option id="category" value="Python">Python</option>
-						<option id="category" value="C%23">C#</option>
-					</select>
+				
 					<tr>
 						<th scope="col">글번호</th>
 						<th scope="col">카테고리</th>
@@ -71,42 +64,42 @@
 		</div>
 
 		<div class="container xlarge">
-			<div class="pagination" id="pageList">
+			<div class="pagination" id="map">
 			<ul>
 					<c:choose>
-						<c:when test="${pageList.startPage==1}">
+						<c:when test="${map.startPage==1}">
 							<li><a
-								href="list.do?searchOption=${searchOption}&page=${pageList.startPage}">처음으로</a></li>
+								href="board.do?${searchOption}&page=${map.startPage}">처음으로</a></li>
 						</c:when>
 						<c:otherwise>
 
 							<li><a
-								href="list.do?searchOption=${searchOption}&page=${pageList.startPage-1}">이전
+								href="board.do?${searchOption}&page=${map.startPage-1}">이전
 									페이지</a></li>
 						</c:otherwise>
 					</c:choose>
 
-					<c:forEach varStatus="cnt" begin="${pageList.startPage}"
-						end="${pageList.endPage}">
+					<c:forEach varStatus="cnt" begin="${map.startPage}"
+						end="${map.endPage}">
 						<c:choose>
-							<c:when test="${cnt.index eq pageList.page }">
+							<c:when test="${cnt.index eq map.page }">
 								<li class="active"><a href="#">${cnt.index}</a></li>
 							</c:when>
 							<c:otherwise>
 								<li><a
-									href="list.do?searchOption=${searchOption}&page=${cnt.index}">${cnt.index}</a></li>
+									href="board.do?${searchOption}&page=${cnt.index}">${cnt.index}</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
 
 					<c:choose>
-						<c:when test="${pageList.endPage ne pageList.totalPage}">
+						<c:when test="${map.endPage ne map.totalPage}">
 							<li><a
-								href="board.do?searchOption=${searchOption}&page=${pageList.endPage+1}">다음페이지</a></li>
+								href="board.do?${searchOption}&page=${map.endPage+1}">다음페이지</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><a
-								href="board.do?searchOption=${searchOption}&page=${pageList.endPage}">마지막으로</a></li>
+								href="board.do?${searchOption}&page=${map.endPage}">마지막으로</a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>
@@ -116,12 +109,7 @@
 
 	<script type="text/javascript">
 	
-	function categorySubmit(event){
-		window.location.href='/web/shareCode/board.do?searchOption='+event+'&page=1';
-		
-	}
-	
-	$("select[name='category']").val("${searchOption}").prop("selected", true);
+
 	
 	
 	function postWrite(){

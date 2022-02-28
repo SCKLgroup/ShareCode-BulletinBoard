@@ -17,18 +17,15 @@ public class BoardDAOImpl implements BoardDAO {
 	@Inject SqlSession SqlSession;
 
 	@Override
-	public List<PostVO> boardAll(String searchOption, String keyword) throws Exception {
-		Map<String,String>map=new HashMap<String, String>();
-		map.put("searchOption", searchOption);
-		map.put("keyword", keyword);
+	public List<PostVO> boardAll(Map<String, Object> map) {
 		return SqlSession.selectList("board.boardAll",map);
 	}
 
 	@Override
-	public int countArticle(String searchOption, String keyword) throws Exception {
-		Map<String, String>map=new HashMap<String,String>();
+	public int countArticle(Map<String, Object> map) {
+		/*Map<String, String>map=new HashMap<String,String>();
 		map.put("searchOption", searchOption);
-		map.put("keyword", keyword);
+		map.put("keyword", keyword);*/
 		return SqlSession.selectOne("board.countArticle",map);
 		
 	}
