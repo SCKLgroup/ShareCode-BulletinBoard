@@ -20,18 +20,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT COUNT(*) FROM POST p, USERINFO u
 		WHERE p.user_no= u.user_no
 		<include refid="search"></include>
-	</select>
+	</select>	
 
 	<sql id="search">
 		<if  test='!searchOption.equals("all")'>
 			AND post_category = #{searchOption}
 		</if>
-		and LOWER(REPLACE(post_title,' ','')) LIKE
+		and (LOWER(REPLACE(post_title,' ','')) LIKE
 		LOWER(REPLACE('%'||#{keyword}||'%',' ','')) OR
 		LOWER(REPLACE(post_content,' ','')) LIKE
 		LOWER(REPLACE('%'||#{keyword}||'%',' ','')) OR
 		LOWER(REPLACE(user_id,' ','')) LIKE
-		LOWER(REPLACE('%'||#{keyword}||'%',' ',''))
+		LOWER(REPLACE('%'||#{keyword}||'%',' ','')))
 
 	</sql>
 </mapper>
