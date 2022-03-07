@@ -88,7 +88,7 @@
 		<div class="panel">
 			<div class="panel-body">
 				<c:choose>
-					<c:when test="${member.user_no eq null}">
+					<c:when test="${member.user_no eq null && user_no eq null}">
 						<textarea class="form-control" name="com_content"
 							placeholder="로그인이 필요합니다" disabled></textarea>
 					</c:when>
@@ -96,7 +96,7 @@
 						<form action="#" id="commentsForm" name="commentsForm"
 							method="post">
 							<input type="hidden" name="post_no" value="${postInfo.post_no}">
-							<input type="hidden" name="user_no" value="${member.user_no}">
+							<input type="hidden" name="user_no" value="${member.user_no + user_no}">
 							<input type="hidden" name="com_job" value="0">
 							<textarea class="form-control" name="com_content2" id="com_content2" placeholder="댓글을 작성하세요"></textarea>
 							<span style="display: none"><textarea name="com_content"></textarea></span>
@@ -212,8 +212,8 @@
 		var temp="";
 		temp+=" <div class=\"panel-body comments-block\" id=\"replyArea\">";
 		temp+="	<form action=\"#\" id=\"replyForm\" name=\"replyForm\" method=\"post\">";
-		temp+="	<input type=\"hidden\" name=\"post_no\" value=\"${postInfo.post_no}\">";
-		temp+="	<input type=\"hidden\" name=\"user_no\" value=\"${member.user_no}\">";
+		temp+="	<input type=\"hidden\" name=\"post_no\" value=\"${postInfo.post_no }\">";
+		temp+="	<input type=\"hidden\" name=\"user_no\" value=\"${member.user_no + user_no}\">";
 		temp+="	<input type=\"hidden\" name=\"com_pnum\" value=\""+pnumNo+"\">";
 		temp+="	<input type=\"hidden\" name=\"com_job\" value=\"1\">";
 		temp+=" <textarea class=\"form-control\" name=\"replyContent2\">@"+userID+" </textarea>";

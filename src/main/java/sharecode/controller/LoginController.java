@@ -26,7 +26,7 @@ public class LoginController {
 		if (login == null) {
 			session.setAttribute("member", null);
 			rttr.addFlashAttribute("msg", false);
-			return "redirect:list.do";
+			return "redirect:list.jsp";
 		} else {
 			session.setAttribute("member", login);
 			session.setMaxInactiveInterval(30*60);

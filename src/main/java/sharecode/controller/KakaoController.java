@@ -42,9 +42,9 @@ public class KakaoController {
         kakaonic.setMaxInactiveInterval(30*60);
         kakaomail.setMaxInactiveInterval(30*60);
         
-        String id = userInfo.get("id").toString();
+        String id = userInfo.get("email").toString();
         String pw = userInfo.get("nickname").toString();
-        String mail = userInfo.get("email").toString();
+        String mail = userInfo.get("id").toString();
         
         String user_no = dao.initKakao(id, pw, mail);
         System.out.println(user_no);
